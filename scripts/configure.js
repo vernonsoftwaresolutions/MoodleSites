@@ -20,7 +20,8 @@ const args = require('minimist')(process.argv.slice(2), {
         'dnsname',
         'hostedzonename',
         'stage',
-        'region'
+        'region',
+        'stackname'
     ],
     default: {
         region: 'us-east-1',
@@ -41,6 +42,7 @@ const hostedzonename = args['hostedzonename']
 const stage = args['stage']
 const region = args.region
 const availableRegions = ['us-east-1', 'us-east-2', 'us-west-1', 'us-west-2', 'eu-west-1', 'eu-west-2', 'eu-central-1', 'ap-northeast-1', 'ap-northeast-2', 'ap-southeast-1', 'ap-southeast-2']
+const stackname = arg['stackname']
 
 //console.log(hostedzonename)
 
@@ -69,6 +71,11 @@ if (!stage) {
     return
 }
 
+if (!stackname) {
+    console.error('You must supply a stackname as --stackname="<stackname>"')
+    return
+}
+
 if (availableRegions.indexOf(region) === -1) {
     console.error(`Amazon API Gateway and Lambda are not available in the ${region} region. Available regions: us-east-1, us-west-2, eu-west-1, eu-central-1, ap-northeast-1, ap-northeast-2, ap-southeast-1, ap-southeast-2`)
     return
@@ -93,6 +100,9 @@ modifyFiles(['./simple-proxy-api.yaml', './package.json', './cloudformation.yaml
     regexp: /YOUR_DNS_NAME/g,
     replacement: dnsname
 }, {
+    regexp: /YOUR_STACK_NAME/g,
+    replacement: stackname
+},{
     regexp: /YOUR_STAGE/g,
     replacement: stage
 }])
