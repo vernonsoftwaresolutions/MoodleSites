@@ -9,8 +9,8 @@
     "cloudFormationStackName": "YOUR_STACK_NAME",
     "functionName": "YOUR_SERVERLESS_EXPRESS_LAMBDA_FUNCTION_NAME",
     "accountId": "YOUR_ACCOUNT_ID",
-    "dnsname": "YOUR_HOSTED_ZONE_NAME",
-    "hostedzonename": "YOUR_DNS_NAME",
+    "dnsname": "YOUR_DNS_NAME",
+    "hostedzonename": "YOUR_HOSTED_ZONE_NAME",
     "cfStage": "YOUR_STAGE"
   },
   "pre-commit": [

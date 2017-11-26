@@ -2,7 +2,6 @@
 swagger: 2.0
 info:
   title: YOUR_STACK_NAME
-basePath: /YOUR_STAGE
 schemes:
 - https
 paths:

@@ -26,4 +26,7 @@ modifyFiles(['./simple-proxy-api.yaml', './package.json', './cloudformation.yaml
 }, {
     regexp: new RegExp(config.stage, 'g'),
     replacement: 'YOUR_STAGE'
+}, {
+    regexp: new RegExp(config.cloudFormationStackName, 'g'),
+    replacement: 'YOUR_STACK_NAME'
 }])
