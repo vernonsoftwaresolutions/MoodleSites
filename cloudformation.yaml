@@ -55,7 +55,7 @@ Resources:
 ## API GATEWAY AND LAMBDA FUNCTION DEFINITIONS
 ##
 ###############################################
-  AwsServerlessExpressFunction:
+  YOUR_SERVERLESS_EXPRESS_LAMBDA_FUNCTION_NAME:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: ./
@@ -87,7 +87,7 @@ Resources:
       #StageName: DUMMY
       StageName: !Ref cfStage
       Variables:
-        ServerlessExpressLambdaFunctionName: !Ref AwsServerlessExpressFunction
+        ServerlessExpressLambdaFunctionName: !Ref YOUR_SERVERLESS_EXPRESS_LAMBDA_FUNCTION_NAME
   
   UrlMapping:
     Type: AWS::ApiGateway::BasePathMapping
@@ -196,7 +196,7 @@ Resources:
     Type: AWS::Lambda::Permission
     Properties:
       Action: lambda:InvokeFunction
-      FunctionName: !GetAtt AwsServerlessExpressFunction.Arn
+      FunctionName: !GetAtt YOUR_SERVERLESS_EXPRESS_LAMBDA_FUNCTION_NAME.Arn
       Principal: apigateway.amazonaws.com
       SourceArn: !Join
         - ''
@@ -219,4 +219,4 @@ Outputs:
         - ".console.aws.amazon.com/lambda/home?region="
         - !Ref AWS::Region
         - "#/functions/"
-        - !Ref AwsServerlessExpressFunction
+        - !Ref YOUR_SERVERLESS_EXPRESS_LAMBDA_FUNCTION_NAME
