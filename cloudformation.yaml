@@ -87,7 +87,7 @@ Resources:
       #StageName: DUMMY
       StageName: !Ref cfStage
       Variables:
-        ServerlessExpressLambdaFunctionName: !Ref YOUR_SERVERLESS_EXPRESS_LAMBDA_FUNCTION_NAME
+        YOUR_SERVERLESS_EXPRESS_LAMBDA_FUNCTION_NAME: !Ref YOUR_SERVERLESS_EXPRESS_LAMBDA_FUNCTION_NAME
   
   UrlMapping:
     Type: AWS::ApiGateway::BasePathMapping
