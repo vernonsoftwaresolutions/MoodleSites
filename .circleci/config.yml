@@ -24,12 +24,16 @@ jobs:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
             - ./node_modules
-     # install python and awscli
+     # install awscli
       - run:
           name: Install dependencies
           working_directory: /
           command: 'sudo apt-get update && sudo apt-get install -y awscli'
-
+     # set default environment
+      - run:
+          name: Install dependencies
+          working_directory: /
+          command: 'aws configure set default.region "${REGION}"'
       - run:
           name: code-coverage
           command: 'npm run cover'
