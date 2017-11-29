@@ -39,7 +39,7 @@ jobs:
           command: 'npm run cover'
       - run:
           name: configure dev environment
-          command: 'npm run config --account-id=${ACCOUNT_ID} --bucket-name=${BUCKET_NAME} --dnsname=${DEV_DNS} --hostedzonename=${HOSTED_ZONE_NAME} --stage=dev --region=${REGION} --function-name=${FUNCTION_NAME}'
+          command: "npm run config -- --account-id=${ACCOUNT_ID} --bucket-name=${BUCKET_NAME} --dnsname=${DEV_DNS} --hostedzonename=${HOSTED_ZONE_NAME} --stage=dev --region=${REGION} --function-name=${FUNCTION_NAME}"
       - run:
           name: Print Package.json
           command: 'cat package.json'
