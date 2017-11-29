@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/MoodleSites
     docker:
-      - image: circleci/node:6.10.3
+      - image: circleci/node:4.8.2
     environment:
       - BUCKET_NAME: "moodle.sites.lambda.deployment"
       - DEV_DNS: "sites.vssdevelopment.com"
