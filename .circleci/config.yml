@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/MoodleSites
     docker:
-      - image: circleci/node:6.12.0-stretch-browsers
+      - image: circleci/node:carbon-stretch-browsers
     environment:
       - BUCKET_NAME: "moodle.sites.lambda.deployment"
       - DEV_DNS: "sites.vssdevelopment.com"
