@@ -39,7 +39,9 @@ jobs:
           command: 'npm run cover'
       - run:
           name: configure dev environment
-          command: 'npm run config -- --account-id="417615409974" --bucket-name="moodle.sites.lambda.deployment" --dnsname="sites.vssdevelopment.com" --hostedzonename="vssdevelopment.com." --stage="dev" --region="us-east-1" --function-name="AwsServerlessExpressFunction"'      - run:
+          command: npm run config -- --account-id="417615409974" --bucket-name="moodle.sites.lambda.deployment" --dnsname="sites.vssdevelopment.com" --hostedzonename="vssdevelopment.com." --stage="dev" --region="us-east-1" --function-name="AwsServerlessExpressFunction"
+          
+      - run:
           name: Print Package.json
           command: 'cat package.json'
       - run:
