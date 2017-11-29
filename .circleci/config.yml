@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/MoodleSites
     docker:
-      - image: circleci/node:4.8.2
+      - image: circleci/node:6.10,
     environment:
       - BUCKET_NAME: "moodle.sites.lambda.deployment"
       - DEV_DNS: "sites.vssdevelopment.com"
@@ -24,6 +24,16 @@ jobs:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
             - ./node_modules
+     # install python and awscli
+      - run:
+          name: Install dependencies
+          working_directory: /
+          command: |
+            apt-get -y -qq update
+            apt-get -y -qq install python3.4-dev
+            curl -O https://bootstrap.pypa.io/get-pip.py
+            python3.4 get-pip.py --user
+            pip install awscli --upgrade --user
       - run:
           name: code-coverage
           command: 'npm run cover'
