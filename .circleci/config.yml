@@ -18,6 +18,9 @@ jobs:
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
+          name: horrible work around
+          command: npm install -g process-nextick-args
+      - run:
           name: install-npm-wee
           command: npm install
       - save_cache:
