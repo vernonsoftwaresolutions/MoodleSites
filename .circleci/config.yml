@@ -51,6 +51,7 @@ jobs:
       - run:
           name: deploy dev environment
           command: 'npm run setup'
+          no_output_timeout: '25m'
 
       - run:
           name: integration test
