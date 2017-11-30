@@ -34,7 +34,7 @@ jobs:
       - run:
           name: Install Newman
           working_directory: /
-          command: 'npm install newman --global'
+          command: 'sudo npm install newman --global'
      # set default environment
       - run:
           name: Configure Region
