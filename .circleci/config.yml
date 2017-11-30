@@ -30,6 +30,11 @@ jobs:
           name: Install dependencies
           working_directory: /
           command: 'sudo apt install python-pip python-dev && sudo  pip install awscli'
+     # install newman
+      - run:
+          name: Install Newman
+          working_directory: /
+          command: 'npm install newman --global'
      # set default environment
       - run:
           name: Configure Region
