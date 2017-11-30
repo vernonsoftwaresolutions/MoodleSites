@@ -1,0 +1,36 @@
+{
+	"id": "1806b4d5-d72b-962d-60bf-2c87fd9da852",
+	"name": "Sites_Collection",
+	"description": "",
+	"order": [
+		"534b6b56-cd19-4444-0a63-fdf1c40e2a95"
+	],
+	"folders": [],
+	"folders_order": [],
+	"timestamp": 1511846329424,
+	"owner": "837563",
+	"public": false,
+	"requests": [
+		{
+			"id": "534b6b56-cd19-4444-0a63-fdf1c40e2a95",
+			"headers": "",
+			"headerData": [],
+			"url": "dev.sites.vssdevelopment.com/users",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1511927798053,
+			"name": "GET Sites",
+			"description": "",
+			"collectionId": "1806b4d5-d72b-962d-60bf-2c87fd9da852",
+			"responses": []
+		}
+	]
+}
