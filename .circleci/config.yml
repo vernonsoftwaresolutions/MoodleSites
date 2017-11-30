@@ -60,7 +60,8 @@ jobs:
 
       - run:
           name: integration test
-          command: 'newman run integration/MOODLE_SITES_DEV.postman_environment.json -e integration/Sites_Collection.postman_collection.json'
+          working_directory: /
+          command: 'newman run integration/Sites_Collection.postman_collection.json -e integration/MOODLE_SITES_DEV.postman_environment.json'
 
       - store_artifacts:
           path: test-results.xml
