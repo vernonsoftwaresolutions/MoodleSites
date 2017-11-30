@@ -121,51 +121,6 @@ Resources:
   #         ResourcePath: "/*"
   #         MetricsEnabled: true
 ###############################################
-## SAMPLE USAGE PLAN TO DEMONSTRATE THROTTLING
-##
-###############################################
-
-  UsagePlan:
-    Type: AWS::ApiGateway::UsagePlan
-    DependsOn: 
-      - UrlMapping
-    Properties:
-      ApiStages:
-      - ApiId: !Ref ApiGateway
-        Stage: !Ref cfStage
-      Description: Customer ABC's usage plan
-      Quota:
-        Limit: 5000
-        Period: MONTH
-      Throttle:
-        BurstLimit: 2
-        RateLimit: 1
-      UsagePlanName: Plan_ABC
-  
-  ## USAGE PLAN KEY
-  UsagePlanKey:
-    Type: "AWS::ApiGateway::UsagePlanKey"
-    DependsOn: 
-      - ApiGateway
-    Properties : 
-      KeyId: !Ref ApiKey
-      KeyType: API_KEY
-      UsagePlanId: !Ref UsagePlan
-
-  ## API KEY
-  ApiKey: 
-    Type: "AWS::ApiGateway::ApiKey"
-    DependsOn: 
-      - UrlMapping
-    Properties: 
-      Name: AbcApiKey
-      Description: "CloudFormation API Key V1"
-      Enabled: true
-      StageKeys: 
-        - RestApiId: 
-            Ref: ApiGateway
-          StageName: !Ref cfStage
-###############################################
 ## LAMBDA PERMISSION ROLES
 ##
 ###############################################
