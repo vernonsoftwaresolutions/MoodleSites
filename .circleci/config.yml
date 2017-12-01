@@ -53,7 +53,7 @@ jobs:
 
       - run:
           name: configure dev environment
-          command: 'npm run config -- --account-id="${ACCOUNT_ID}" --bucket-name="${BUCKET_NAME}" --stackname="${DEV_STACK}"  --dnsname="${SITES_DNS}" --hostedzonename="${HOSTED_ZONE_NAME}" --stage="dev" --region="${REGION}" --function-name="${FUNCTION_NAME}"'
+          command: 'npm run config -- package.json simple-proxy-api.yaml cloudformation.yaml --account-id=${ACCOUNT_ID} --bucket-name=${BUCKET_NAME} --stackname=${DEV_STACK}  --dnsname=${SITES_DNS} --hostedzonename=${HOSTED_ZONE_NAME} --stage=dev --region=${REGION} --function-name=${FUNCTION_NAME}'
 
       - run:
           name: deploy dev environment
@@ -66,7 +66,7 @@ jobs:
 #configure stage
       - run:
           name: reconfigure config
-          command: 'npm run deconfig'
+          command: 'npm run deconfig -- package.json simple-proxy-api.yaml cloudformation.yaml'
 
       - run:
           name: configure stage environment

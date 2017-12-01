@@ -19,8 +19,8 @@
     ],
     "scripts": {
         "start": "node app.local.js",
-        "config": "node ./node_modules/aws-serverless-deploy-utils/configure.js",
-        "deconfig": "node ./node_modules/aws-serverless-deploy-utils/deconfigure.js",
+        "config": "aws-deploy-utils configure",
+        "deconfig": "aws-deploy-utils deconfigure",
         "cover": "nyc npm run test",
         "check-coverage": "nyc check-coverage --statements 100 --branches 100 --functions 100 --lines 100",
         "local": "node scripts/local",
