@@ -1,3 +1,5 @@
+'use strict'
+
 const app = require('../app')
 const request = require('supertest')
 const assert = require('chai').assert
