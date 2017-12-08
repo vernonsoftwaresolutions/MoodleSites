@@ -11,7 +11,9 @@ describe('GET /accounts/10/sites', function() {
         .set('Accept', 'application/json')
         .expect(200)
         .then(response => {
-            assert(response.body.aid, 10)
+            assert(response.body[0].accountId, 1)
+            assert(response.body[0].siteId, 2)
+            
         })
     });
 });
@@ -22,5 +24,9 @@ describe('POST /accounts/10/sites', function() {
         .post('/accounts/10/sites')
         .set('Accept', 'application/json')
         .expect(201)
+        .then(response => {
+            assert(response.body.siteId, 2)
+            
+        })
     });
 });
