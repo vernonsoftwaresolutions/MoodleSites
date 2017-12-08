@@ -27,6 +27,9 @@ jobs:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
             - ./node_modules
+      - run: 
+          name: install dev dependencies
+          command: npm install --only=dev
      # install awscli
       - run:
           name: Install dependencies
