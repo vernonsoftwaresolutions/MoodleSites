@@ -54,7 +54,7 @@
         "winston": "^2.4.0"
     },
     "devDependencies": {
-        "aws-serverless-deploy-utils": "0.0.1",
+        "aws-serverless-deploy-utils": "0.0.4",
         "nyc": "^11.3.0"
     },
     "nyc": {
