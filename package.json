@@ -19,7 +19,7 @@
     ],
     "scripts": {
         "start": "node app.local.js",
-        "config": "aws-deploy-utils configure",
+        "config": "aws-deploy-utils configure package.json simple-proxy-api.yaml cloudformation.yaml",
         "deconfig": "aws-deploy-utils deconfigure",
         "cover": "nyc npm run test",
         "check-coverage": "nyc check-coverage --statements 100 --branches 100 --functions 100 --lines 100",
