@@ -76,12 +76,12 @@ jobs:
           command: 'npm run config -- --account-id="${ACCOUNT_ID}" --bucket-name="${BUCKET_NAME}" --stackname="${STAGE_STACK}"  --dnsname="${SITES_DNS}" --hostedzonename="${HOSTED_ZONE_NAME}" --stage="stage" --region="${REGION}" --function-name="${FUNCTION_NAME}"'
 
       - run:
-          name: deploy dev environment
+          name: deploy stage environment
           command: 'npm run setup'
           no_output_timeout: '25m'
 
       - run:
-          name: integration test
+          name: stage integration test
           command: 'newman run integration/Sites_Collection.postman_collection.json -e integration/MOODLE_SITES_DEV.postman_environment.json'
 
       - store_artifacts:
