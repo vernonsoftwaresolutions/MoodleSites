@@ -5,7 +5,7 @@ const cors = require('cors')
 const compression = require('compression')
 const awsServerlessExpressMiddleware = require('aws-serverless-express/middleware')
 const app = express()
-const router = require('./routes/routes')
+const routes = require('./routes/routes')
 
 app.use(compression())
 app.use(cors())
