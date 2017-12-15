@@ -13,6 +13,11 @@ Parameters:
     Type: String
     Description: Name of existing route 53 hosted zone name
 
+  tablebasename:
+    Type: String
+    Description: Name of the base table name for dynamodb
+    Default: MoodleSites
+
   cfStage:
     Type: String
     AllowedValues:
@@ -136,7 +141,7 @@ Resources:
           Action: sts:AssumeRole
       Path: "/"
       Policies:
-      - PolicyName: root
+      - PolicyName: cloudwatch
         PolicyDocument:
           Version: '2012-10-17'
           Statement:
@@ -146,6 +151,22 @@ Resources:
             - logs:CreateLogStream
             - logs:PutLogEvents
             Resource: arn:aws:logs:*:*:*
+      - PolicyName: dynamodb
+        PolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+          - Effect: Allow
+            Action:
+            - logs:*
+            Resource: arn:aws:logs:*:*:*
+          - Effect: Allow
+            Action:
+            - "dynamodb:DeleteItem"
+            - "dynamodb:GetItem"
+            - "dynamodb:PutItem"
+            - "dynamodb:Scan"
+            - "dynamodb:UpdateItem"
+            Resource: !Sub arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${MoodleSitesTable}/*
 
   LambdaApiGatewayExecutionPermission:
     Type: AWS::Lambda::Permission
@@ -162,6 +183,29 @@ Resources:
           - ":"
           - !Ref ApiGateway
           - "/*/*"
+
+
+#################################
+## DynamoDB Resource
+##
+#################################
+
+MoodleSitesTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        -
+          AttributeName: "email"
+          AttributeType: "S"
+      KeySchema:
+        -
+          AttributeName: "email"
+          KeyType: "HASH"
+      ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+      TableName: !Sub ${tablebasename}_${cfStage}
+
 
 
 Outputs:
