@@ -190,21 +190,21 @@ Resources:
 ##
 #################################
 
-MoodleSitesTable:
-    Type: AWS::DynamoDB::Table
-    Properties:
-      AttributeDefinitions:
-        -
-          AttributeName: "accountId"
-          AttributeType: "S"
-      KeySchema:
-        -
-          AttributeName: "accountId"
-          KeyType: "HASH"
-      ProvisionedThroughput:
-          ReadCapacityUnits: 1
-          WriteCapacityUnits: 1
-      TableName: !Sub ${tablebasename}_${cfStage}
+  MoodleSitesTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        AttributeDefinitions:
+          -
+            AttributeName: "accountId"
+            AttributeType: "S"
+        KeySchema:
+          -
+            AttributeName: "accountId"
+            KeyType: "HASH"
+        ProvisionedThroughput:
+            ReadCapacityUnits: 1
+            WriteCapacityUnits: 1
+        TableName: !Sub ${tablebasename}_${cfStage}
 
 
 
