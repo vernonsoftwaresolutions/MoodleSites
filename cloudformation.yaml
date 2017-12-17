@@ -195,11 +195,11 @@ MoodleSitesTable:
     Properties:
       AttributeDefinitions:
         -
-          AttributeName: "email"
+          AttributeName: "accountId"
           AttributeType: "S"
       KeySchema:
         -
-          AttributeName: "email"
+          AttributeName: "accountId"
           KeyType: "HASH"
       ProvisionedThroughput:
           ReadCapacityUnits: 1
