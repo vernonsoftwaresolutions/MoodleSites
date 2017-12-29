@@ -6,9 +6,9 @@ const getConfigByKey = require('../config/config');
 const winston = require('winston')
 
 const createSite = function(site){
-    var request = new AWS.DynamoDB({region: getConfigByKey('REGION'), apiVersion: '2012-08-10'});
+    let request = new AWS.DynamoDB({region: getConfigByKey('REGION'), apiVersion: '2012-08-10'});
     // Create the DynamoDB service object
-    var params = {
+    let params = {
         Item: {
             accountId: {
                 S: site.accountId

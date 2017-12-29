@@ -1,3 +1,5 @@
+'use strict'
+
 const expect = require('chai').expect
 const createSite = require('../../db/sitesrepository')
 const AWS = require('aws-sdk-mock')
