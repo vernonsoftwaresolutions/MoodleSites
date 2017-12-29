@@ -72,6 +72,8 @@ Resources:
       Environment:
         Variables:
           ENVIRONMENT: !Ref cfStage
+          TABLE_NAME: !Sub ${tablebasename}_${cfStage}
+          REGION: !Sub '${AWS::Region}'
       Events:
         ProxyApiRoot:
           Type: Api

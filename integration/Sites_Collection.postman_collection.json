@@ -58,33 +58,34 @@
 			],
 			"url": "{{URL}}/accounts/10/sites",
 			"queryParams": [],
+			"events": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c9caf510-1b22-4af0-8972-6f7fbeaa7fb9",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
 			"pathVariables": {},
 			"pathVariableData": [],
 			"method": "POST",
 			"data": [],
 			"dataMode": "raw",
-			"time": 1513313339802,
+			"auth": null,
+			"time": 1514580233803,
 			"name": "POST Sites",
 			"description": "",
 			"collectionId": "1806b4d5-d72b-962d-60bf-2c87fd9da852",
 			"responses": [],
-			"auth": null,
-			"events": [
-				{
-					"listen": "test",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							"tests[\"Status code is 200\"] = responseCode.code === 200;"
-						]
-					}
-				}
-			],
 			"preRequestScript": null,
-			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;",
+			"tests": null,
 			"currentHelper": null,
 			"helperAttributes": null,
-			"rawModeData": "{\n        \"accountId\": 1,\n        \"siteId\": 2\n    }"
+			"rawModeData": "{\n        \"accountId\": \"SOMEGUID\"\n}"
 		}
 	]
 }
