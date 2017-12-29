@@ -1,13 +1,14 @@
 'use strict'
+
 // Load the SDK for JavaScript
 var AWS = require('aws-sdk');
 const getConfigByKey = require('../config/config');
 const winston = require('winston')
 
 const createSite = function(site){
-    let request = new AWS.DynamoDB({region: getConfigByKey('REGION'), apiVersion: '2012-08-10'});
+    var request = new AWS.DynamoDB({region: getConfigByKey('REGION'), apiVersion: '2012-08-10'});
     // Create the DynamoDB service object
-    let params = {
+    var params = {
         Item: {
             accountId: {
                 S: site.accountId
