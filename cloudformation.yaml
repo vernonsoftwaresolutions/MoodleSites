@@ -168,7 +168,7 @@ Resources:
             - "dynamodb:PutItem"
             - "dynamodb:Scan"
             - "dynamodb:UpdateItem"
-            Resource: !Sub arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${MoodleSitesTable}
+            Resource: !Sub arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${MoodleSiteTable}
 
   LambdaApiGatewayExecutionPermission:
     Type: AWS::Lambda::Permission
@@ -192,7 +192,7 @@ Resources:
 ##
 #################################
 
-  MoodleSitesTable:
+  MoodleSiteTable:
       Type: AWS::DynamoDB::Table
       Properties:
         AttributeDefinitions:
@@ -207,7 +207,7 @@ Resources:
           -
             AttributeName: "accountId"
             KeyType: "HASH"
-        -
+          -
           AttributeName: "siteId"
           KeyType: "RANGE"
         ProvisionedThroughput:
