@@ -208,8 +208,8 @@ Resources:
             AttributeName: "accountId"
             KeyType: "HASH"
           -
-          AttributeName: "siteId"
-          KeyType: "RANGE"
+            AttributeName: "siteId"
+            KeyType: "RANGE"
         ProvisionedThroughput:
             ReadCapacityUnits: 1
             WriteCapacityUnits: 1
