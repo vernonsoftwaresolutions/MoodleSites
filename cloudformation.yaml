@@ -16,7 +16,7 @@ Parameters:
   tablebasename:
     Type: String
     Description: Name of the base table name for dynamodb
-    Default: MoodleSites
+    Default: MoodleSite
 
   cfStage:
     Type: String
