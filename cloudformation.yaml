@@ -199,7 +199,6 @@ Resources:
           -
             AttributeName: "accountId"
             AttributeType: "S"
-        AttributeDefinitions:
           -
             AttributeName: "siteId"
             AttributeType: "S"
@@ -210,6 +209,7 @@ Resources:
           -
             AttributeName: "siteId"
             KeyType: "RANGE"
+
         ProvisionedThroughput:
             ReadCapacityUnits: 1
             WriteCapacityUnits: 1
