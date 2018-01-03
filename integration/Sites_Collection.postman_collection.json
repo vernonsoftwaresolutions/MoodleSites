@@ -62,10 +62,12 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "c9caf510-1b22-4af0-8972-6f7fbeaa7fb9",
+						"id": "ec157eed-64a3-4585-86da-c70d93eb55a3",
 						"type": "text/javascript",
 						"exec": [
-							""
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
 						]
 					}
 				}
@@ -76,13 +78,13 @@
 			"data": [],
 			"dataMode": "raw",
 			"auth": null,
-			"time": 1514580233803,
+			"time": 1514953817211,
 			"name": "POST Sites",
 			"description": "",
 			"collectionId": "1806b4d5-d72b-962d-60bf-2c87fd9da852",
 			"responses": [],
 			"preRequestScript": null,
-			"tests": null,
+			"tests": "pm.test(\"Status code is 201\", function () {\n    pm.response.to.have.status(201);\n});",
 			"currentHelper": null,
 			"helperAttributes": null,
 			"rawModeData": "{\n        \"accountId\": \"SOMEGUID\"\n}"

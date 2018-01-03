@@ -9,7 +9,7 @@ describe('While no environment is provided', () => {
             console.log(getConfigByKey)
             
             const val = getConfigByKey('POST_CREATION')
-            assert.equal(val, "http://localhost:9001/dev/moodle/tenants")
+            assert.equal(val, "http://api.vssdevelopment.com/dev/moodle/tenants")
         })
 
     })

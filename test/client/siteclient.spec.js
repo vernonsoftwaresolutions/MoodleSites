@@ -4,7 +4,7 @@ const fetchMock = require('fetch-mock')
 const expect = require('chai').expect
 const initializeSiteCreation = require('../../client/siteclient')
 
-const postUrl = 'http://localhost:9001/dev/moodle/tenants';
+const postUrl = 'https://api.vssdevelopment.com/dev/moodle/tenants';
 
 
 describe('siteclient initializeSiteCreation', function () {
@@ -16,9 +16,7 @@ describe('siteclient initializeSiteCreation', function () {
   //     siteId: 11
   //   }
 
-  //   fetchMock.mock((url, opts) => {
-  //         return url === postUrl && opts.body === JSON.stringify(requestBody);
-  //     }, {
+  //   fetchMock.mock(postUrl, {
   //       body: JSON.stringify({messageId: "somemessageid"}),
   //       status: 202,
   //   });

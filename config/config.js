@@ -2,7 +2,7 @@
 const winston = require('winston')
 
 let defaultConfig = {
-    POST_CREATION: "http://localhost:9001/dev/moodle/tenants",
+    POST_CREATION: "http://api.vssdevelopment.com/dev/moodle/tenants",
     REGION: process.env.REGION || 'us-east-1',
     TABLE_NAME: process.env.TABLE_NAME || 'SITES'
 }

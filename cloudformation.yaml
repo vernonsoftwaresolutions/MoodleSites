@@ -65,7 +65,7 @@ Resources:
     Properties:
       CodeUri: ./
       Handler: lambda.handler
-      MemorySize: 1024
+      MemorySize: 512
       Role: !GetAtt LambdaExecutionRole.Arn
       Runtime: nodejs6.10
       Timeout: 30
@@ -168,7 +168,7 @@ Resources:
             - "dynamodb:PutItem"
             - "dynamodb:Scan"
             - "dynamodb:UpdateItem"
-            Resource: !Sub arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${MoodleSitesTable}/*
+            Resource: !Sub arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${MoodleSitesTable}
 
   LambdaApiGatewayExecutionPermission:
     Type: AWS::Lambda::Permission

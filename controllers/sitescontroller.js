@@ -12,9 +12,9 @@ router.get('/accounts/:aid/sites', (req, res) => {
 router.post('/accounts/:aid/sites', (req, res) => {
     let accountId = req.params.aid
     
-    createSite(accountId).then(res => {
-        winston.info("returning successful ", res)
-        res.status(201).json({message: "Created"})        
+    createSite(accountId).then(result => {
+        winston.info("returning successful ", result)
+        res.status(201).json(result)        
     })
     .catch(err => {
         //todo- more explicit error handling
