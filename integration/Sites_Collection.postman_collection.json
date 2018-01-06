@@ -110,14 +110,16 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "16ae7ac0-1b54-4f06-bae5-a870ab35e9af",
+						"id": "8c929368-a889-4bcb-ba82-70159a7ca37e",
 						"type": "text/javascript",
 						"exec": [
 							"tests[\"Status code is 200\"] = responseCode.code === 200;",
 							"",
 							"var jsonData = JSON.parse(responseBody);",
 							"",
-							"tests[\"length increased\"] = globals.totalSites === jsonData.length++;",
+							"var previousTotal = parseInt(globals.totalSites)",
+							"var previousTotalInc = previousTotal + 1",
+							"tests[\"length increased\"] = previousTotalInc === jsonData.length;",
 							"",
 							"",
 							""
@@ -131,13 +133,13 @@
 			"data": null,
 			"dataMode": "params",
 			"auth": null,
-			"time": 1515279826430,
+			"time": 1515281266682,
 			"name": "GET Sites Length Increased",
 			"description": "",
 			"collectionId": "1806b4d5-d72b-962d-60bf-2c87fd9da852",
 			"responses": [],
 			"preRequestScript": null,
-			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;\n\nvar jsonData = JSON.parse(responseBody);\n\ntests[\"length increased\"] = globals.totalSites === jsonData.length++;\n\n\n",
+			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;\n\nvar jsonData = JSON.parse(responseBody);\n\nvar previousTotal = parseInt(globals.totalSites)\nvar previousTotalInc = previousTotal + 1\ntests[\"length increased\"] = previousTotalInc === jsonData.length;\n\n\n",
 			"currentHelper": null,
 			"helperAttributes": null
 		}
