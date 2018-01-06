@@ -5,7 +5,7 @@ var AWS = require('aws-sdk');
 const getConfigByKey = require('../config/config');
 const winston = require('winston')
 
-const createSite = function(site){
+exports.createSite = function(site){
     let request = new AWS.DynamoDB({region: getConfigByKey('REGION'), apiVersion: '2012-08-10'});
     // Create the DynamoDB service object
     let params = {
@@ -39,6 +39,30 @@ const createSite = function(site){
     })
 }
 
-module.exports = createSite;
+exports.getSites = function(accountId){
+    let request = new AWS.DynamoDB({region: getConfigByKey('REGION'), apiVersion: '2012-08-10'});
+    // Create the DynamoDB query object
+    var params = {
+        ExpressionAttributeValues: {
+          ':s': {S: accountId}
+         },
+       KeyConditionExpression: 'accountId = :s',
+       TableName: getConfigByKey('TABLE_NAME')
+      };
+      
+      winston.info("about to query with params ", params)
+      //execute query and resolve or reject
+      return new Promise((resolve, reject)=>{        
+        request.query(params, function(err, data) {
+            if (err) {
+                winston.error("error retrieving objects ", err)
+                return reject(err)
+            } else {
+                winston.info("returned data ", data)
+                return resolve(data.Items)
+            }
+        });   
+    })
+}
 
 

@@ -4,13 +4,17 @@
 	"description": "",
 	"order": [
 		"534b6b56-cd19-4444-0a63-fdf1c40e2a95",
-		"82bfe6a5-3c56-76d2-cb5c-cddd92fa35bd"
+		"82bfe6a5-3c56-76d2-cb5c-cddd92fa35bd",
+		"d8eaf7b9-f912-1709-3c42-76fc00614d9e"
 	],
 	"folders": [],
 	"folders_order": [],
 	"timestamp": 1511846329424,
 	"owner": "837563",
 	"public": false,
+	"events": [],
+	"variables": [],
+	"auth": null,
 	"requests": [
 		{
 			"id": "534b6b56-cd19-4444-0a63-fdf1c40e2a95",
@@ -18,30 +22,37 @@
 			"headerData": [],
 			"url": "{{URL}}/accounts/10/sites",
 			"queryParams": [],
+			"events": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "718ff7c3-1c7c-4aea-a836-5e893f5d35b3",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"postman.setGlobalVariable(\"totalSites\",jsonData.length);",
+							"",
+							""
+						]
+					}
+				}
+			],
 			"pathVariables": {},
 			"pathVariableData": [],
 			"method": "GET",
 			"data": null,
 			"dataMode": "params",
-			"time": 1512710551815,
+			"auth": null,
+			"time": 1515279665748,
 			"name": "GET Sites",
 			"description": "",
 			"collectionId": "1806b4d5-d72b-962d-60bf-2c87fd9da852",
 			"responses": [],
-			"auth": null,
-			"events": [
-				{
-					"listen": "test",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							"tests[\"Status code is 200\"] = responseCode.code === 200;"
-						]
-					}
-				}
-			],
 			"preRequestScript": null,
-			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;",
+			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;\n\nvar jsonData = JSON.parse(responseBody);\n\npostman.setGlobalVariable(\"totalSites\",jsonData.length);\n\n",
 			"currentHelper": null,
 			"helperAttributes": null
 		},
@@ -88,6 +99,47 @@
 			"currentHelper": null,
 			"helperAttributes": null,
 			"rawModeData": "{\n        \"accountId\": \"SOMEGUID\"\n}"
+		},
+		{
+			"id": "d8eaf7b9-f912-1709-3c42-76fc00614d9e",
+			"headers": "",
+			"headerData": [],
+			"url": "{{URL}}/accounts/10/sites",
+			"queryParams": [],
+			"events": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "16ae7ac0-1b54-4f06-bae5-a870ab35e9af",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"tests[\"length increased\"] = globals.totalSites === jsonData.length++;",
+							"",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"auth": null,
+			"time": 1515279826430,
+			"name": "GET Sites Length Increased",
+			"description": "",
+			"collectionId": "1806b4d5-d72b-962d-60bf-2c87fd9da852",
+			"responses": [],
+			"preRequestScript": null,
+			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;\n\nvar jsonData = JSON.parse(responseBody);\n\ntests[\"length increased\"] = globals.totalSites === jsonData.length++;\n\n\n",
+			"currentHelper": null,
+			"helperAttributes": null
 		}
 	]
 }

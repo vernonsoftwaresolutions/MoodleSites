@@ -19,12 +19,13 @@ describe('Site model tests', function() {
                 warnOnUnregistered: false,
                 useCleanCache: true,
             });
-            mockery.registerMock('../db/sitesrepository', 
-                 (site) => {
+            mockery.registerMock('../db/sitesrepository', {
+                createSite: (site) => {
                     console.log("here")
                     assert.equal(site.accountId, aid);
                     return Promise.resolve(site);
-                });            
+                }  
+            })        
             Site = require('../../model/site')
         })
         afterEach(() => {
@@ -41,12 +42,29 @@ describe('Site model tests', function() {
 
     });   
     describe('Site getAll', function() {
-        
-        it('respond with json', function() {
-            assert(Site.getAll(aid), [{
-                "accountId": 1,
-                "siteId": 2,
-            }])
+        let aid = "someid"
+        let result = [{ accountId: aid, siteId: "someid" }];
+        beforeEach(() => {
+            mockery.enable({
+                warnOnUnregistered: false,
+                useCleanCache: true,
+            });
+            mockery.registerMock('../db/sitesrepository', {
+                getSites: (accountId) => {
+                    assert.equal(accountId, aid);
+                    return Promise.resolve(result);
+                }  
+            })        
+            Site = require('../../model/site')
+        })
+        afterEach(() => {
+            mockery.disable();
+        });
+        it('Returns array', function() {
+
+            Site.getAll(aid).then(res => {
+                assert.deepEqual(res, result)
+            })
         });      
      
     });        

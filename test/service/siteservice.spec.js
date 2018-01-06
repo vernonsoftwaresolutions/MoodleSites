@@ -26,7 +26,7 @@ describe('Site service tests', function() {
                 console.log("after this")
                 return Promise.resolve({messageId:"Okay"});
             });            
-            createSite = require('../../service/siteservice')
+            createSite = require('../../service/siteservice').createSite
         })
         afterEach(() => {
             mockery.disable();
@@ -54,7 +54,7 @@ describe('Site service tests', function() {
                     return Promise.reject("Error");
                 }
             });            
-            createSite = require('../../service/siteservice')
+            createSite = require('../../service/siteservice').createSite
         })
         afterEach(() => {
             mockery.disable();
@@ -89,7 +89,7 @@ describe('Site service tests', function() {
                    return Promise.reject({messageId:"Okay"});
                }
             );            
-            createSite = require('../../service/siteservice')
+            createSite = require('../../service/siteservice').createSite
         })
         afterEach(() => {
             mockery.disable();
@@ -102,6 +102,57 @@ describe('Site service tests', function() {
             })
         });      
     })    
+    describe('Sites retrieval successful', function() {
+        let getAll;
+        beforeEach(() => {
+            mockery.enable({
+                warnOnUnregistered: false,
+                useCleanCache: true,
+            });
+            mockery.registerMock('../model/site', {
+                getAll: (accountId) => {
+                    assert.equal(accountId, accountId);
+                    return Promise.resolve("Okay");
+                }
+            });            
+            getAll = require('../../service/siteservice').getAll
+        })
+        afterEach(() => {
+            mockery.disable();
+        });
+        
+        it('respond with okay', function(done) {
+            getAll(accountId).then(data =>{
 
-
+                assert.equal(data,"Okay")
+                done()
+            })
+        });      
+    }) 
+    describe('Sites retrieval returns error', function() {
+        let getAll;
+        beforeEach(() => {
+            mockery.enable({
+                warnOnUnregistered: false,
+                useCleanCache: true,
+            });
+            mockery.registerMock('../model/site', {
+                getAll: (accountId) => {
+                    assert.equal(accountId, accountId);
+                    return Promise.reject("error");
+                }
+            });            
+            getAll = require('../../service/siteservice').getAll
+        })
+        afterEach(() => {
+            mockery.disable();
+        });
+        
+        it('respond with okay', function(done) {
+            getAll(accountId).catch(err =>{
+                assert.equal(err.message,"Error retrieving sites")
+                done()
+            })
+        });      
+    }) 
 })
