@@ -3,6 +3,7 @@
 	"name": "Sites_Collection",
 	"description": "",
 	"order": [
+		"d37dc201-19be-369b-5983-8ad4f9528e5e",
 		"534b6b56-cd19-4444-0a63-fdf1c40e2a95",
 		"82bfe6a5-3c56-76d2-cb5c-cddd92fa35bd",
 		"d8eaf7b9-f912-1709-3c42-76fc00614d9e"
@@ -20,7 +21,7 @@
 			"id": "534b6b56-cd19-4444-0a63-fdf1c40e2a95",
 			"headers": "",
 			"headerData": [],
-			"url": "{{URL}}/accounts/10/sites",
+			"url": "{{URL}}/accounts/{{randomClient}}/sites",
 			"queryParams": [],
 			"events": [
 				{
@@ -46,7 +47,7 @@
 			"data": null,
 			"dataMode": "params",
 			"auth": null,
-			"time": 1515279665748,
+			"time": 1515282086222,
 			"name": "GET Sites",
 			"description": "",
 			"collectionId": "1806b4d5-d72b-962d-60bf-2c87fd9da852",
@@ -67,7 +68,7 @@
 					"enabled": true
 				}
 			],
-			"url": "{{URL}}/accounts/10/sites",
+			"url": "{{URL}}/accounts/{{randomClient}}/sites",
 			"queryParams": [],
 			"events": [
 				{
@@ -89,7 +90,7 @@
 			"data": [],
 			"dataMode": "raw",
 			"auth": null,
-			"time": 1514953817211,
+			"time": 1515282093502,
 			"name": "POST Sites",
 			"description": "",
 			"collectionId": "1806b4d5-d72b-962d-60bf-2c87fd9da852",
@@ -101,10 +102,66 @@
 			"rawModeData": "{\n        \"accountId\": \"SOMEGUID\"\n}"
 		},
 		{
+			"id": "d37dc201-19be-369b-5983-8ad4f9528e5e",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{URL}}/accounts/{{randomClient}}/sites",
+			"queryParams": [],
+			"events": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ec157eed-64a3-4585-86da-c70d93eb55a3",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "1ce9af36-0339-4c65-a300-5047a32984ba",
+						"type": "text/javascript",
+						"exec": [
+							"var randomClient = Math.random().toString(36).slice(2)",
+							"",
+							"postman.setGlobalVariable(\"randomClient\",randomClient);"
+						]
+					}
+				}
+			],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"auth": null,
+			"time": 1515282056242,
+			"name": "POST Sites",
+			"description": "",
+			"collectionId": "1806b4d5-d72b-962d-60bf-2c87fd9da852",
+			"responses": [],
+			"preRequestScript": "var randomClient = Math.random().toString(36).slice(2)\n\npostman.setGlobalVariable(\"randomClient\",randomClient);",
+			"tests": "pm.test(\"Status code is 201\", function () {\n    pm.response.to.have.status(201);\n});",
+			"currentHelper": null,
+			"helperAttributes": null,
+			"rawModeData": "{\n        \"accountId\": \"SOMEGUID\"\n}"
+		},
+		{
 			"id": "d8eaf7b9-f912-1709-3c42-76fc00614d9e",
 			"headers": "",
 			"headerData": [],
-			"url": "{{URL}}/accounts/10/sites",
+			"url": "{{URL}}/accounts/{{randomClient}}/sites",
 			"queryParams": [],
 			"events": [
 				{
@@ -133,7 +190,7 @@
 			"data": null,
 			"dataMode": "params",
 			"auth": null,
-			"time": 1515281266682,
+			"time": 1515282101398,
 			"name": "GET Sites Length Increased",
 			"description": "",
 			"collectionId": "1806b4d5-d72b-962d-60bf-2c87fd9da852",
