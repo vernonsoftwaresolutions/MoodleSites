@@ -13,7 +13,7 @@ const initializeSiteCreation = function(site){
         fetch(url, { method: 'POST', body: JSON.stringify(site) })
         .then(res => {
             if(!res.ok){
-                winston.error("Received invalid response code ", res.status, " with body ", res.body)
+                winston.error("Received invalid response code ", res.status)
                 reject(new Error("Service Unavailable"))
             }
             winston.debug("Returned response ", res)
