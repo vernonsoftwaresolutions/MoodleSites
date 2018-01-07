@@ -14,7 +14,6 @@ exports.createSite = function(site){
                 S: site.accountId
               },
             siteId: {
-                //create guid
                 S: site.siteId
               },
             email: {
@@ -23,8 +22,8 @@ exports.createSite = function(site){
             url: {
                 S: site.url
             },
-            creationTimestamp:{
-                N: site.creationTimestamp
+            creationTimestamp: {
+                N: site.creationTimestamp.toString()
             } 
         }, 
         ReturnConsumedCapacity: "TOTAL", 
