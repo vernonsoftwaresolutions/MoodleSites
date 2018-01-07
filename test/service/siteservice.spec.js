@@ -6,6 +6,8 @@ const Guid = require('guid')
 describe('Site service tests', function() {
     let createSite;
     let accountId = "ACCOUNTGUID"
+    let requestSite = {}
+
     describe('Site creation successful', function() {
         beforeEach(() => {
             mockery.enable({
@@ -33,7 +35,7 @@ describe('Site service tests', function() {
         });
         
         it('respond with okay', function(done) {
-            createSite(accountId).then(data =>{
+            createSite(accountId, requestSite).then(data =>{
                 console.log(data)
                 assert.equal(data.accountId,accountId)
                 done()
@@ -61,7 +63,7 @@ describe('Site service tests', function() {
         });
         
         it('respond with error', function(done) {
-            createSite(accountId).catch(err =>{
+            createSite(accountId, requestSite).catch(err =>{
                 assert.equal(err.message,"Error storing site")
                 done()
             })
@@ -96,7 +98,7 @@ describe('Site service tests', function() {
         });
         
         it('respond with error', function(done) {
-            createSite(accountId).catch(err =>{
+            createSite(accountId, requestSite).catch(err =>{
                 assert.equal(err.message,"Error creating site")
                 done()
             })

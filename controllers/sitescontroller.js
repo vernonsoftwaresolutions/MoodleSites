@@ -21,8 +21,9 @@ router.get('/accounts/:aid/sites', (req, res) => {
   
 router.post('/accounts/:aid/sites', (req, res) => {
     let accountId = req.params.aid
-    
-    service.createSite(accountId)
+    let site = req.body
+
+    service.createSite(accountId, site)
     .then(result => {
         winston.info("returning successful ", result)
         res.status(201).json(result)        

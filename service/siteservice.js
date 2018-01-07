@@ -20,11 +20,17 @@ exports.getAll = function(accountId){
     })
 }    
 
-exports.createSite = function(accountId){
+exports.createSite = function(accountId, siteRequest){
+    //create initial site object to be stored
+    //todo- this needs to be refactored and moved to a model for validation
     let site = {
         accountId: accountId,
-        siteId: Guid.create().value
+        siteId: Guid.create().value,
+        email: siteRequest.email,
+        url: siteRequest.url,
+        creationTimestamp: Date.now()
     }
+
     winston.info("attempting to create site with generated id ", site)
 
     return new Promise((resolve, reject) => {
