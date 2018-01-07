@@ -24,7 +24,7 @@ exports.createSite = function(site){
                 S: site.url
             },
             creationTimestamp:{
-                S: site.creationTimestamp
+                N: site.creationTimestamp
             } 
         }, 
         ReturnConsumedCapacity: "TOTAL", 
