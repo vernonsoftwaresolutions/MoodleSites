@@ -15,7 +15,11 @@ describe('sites repository', () => {
         
         let site = {
             accountId: accountId,
-            siteId: Guid.create().value
+            siteId: Guid.create().value,
+            email: "email",
+            url: "url",
+            creationTimestamp: Date.now()
+
         }
     
         let item= {
@@ -24,8 +28,18 @@ describe('sites repository', () => {
               },
             siteId: {
                 S: site.siteId
-              } 
+              },
+            email: {
+                S: site.email
+            },
+            url: {
+                S: site.url
+            },
+            creationTimestamp: {
+                N: site.creationTimestamp.toString()
+            }  
         }
+        
         beforeEach(() => {
             AWS.mock('DynamoDB', 'putItem', function (params, callback) {
                 callback(null,{ message: "okay" });
@@ -49,7 +63,11 @@ describe('sites repository', () => {
         
         let site = {
             accountId: accountId,
-            siteId: Guid.create().value
+            siteId: Guid.create().value,
+            email: "email",
+            url: "url",
+            creationTimestamp: Date.now()
+
         }
     
         let item= {
