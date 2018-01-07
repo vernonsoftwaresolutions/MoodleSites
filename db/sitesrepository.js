@@ -16,7 +16,16 @@ exports.createSite = function(site){
             siteId: {
                 //create guid
                 S: site.siteId
-              } 
+              },
+            email: {
+                S: site.email
+            },
+            url: {
+                S: site.url
+            },
+            creationTimestamp:{
+                S: site.creationTimestamp
+            } 
         }, 
         ReturnConsumedCapacity: "TOTAL", 
         TableName: getConfigByKey('TABLE_NAME')
