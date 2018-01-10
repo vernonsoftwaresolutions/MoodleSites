@@ -6,7 +6,7 @@ let defaultConfig = {
     REGION: process.env.REGION || 'us-east-1',
     TABLE_NAME: process.env.TABLE_NAME || 'SITES',
     VPC_ID: process.env.VPC_ID || 'VPC-Id',
-    HOSTED_ZONE_NAME: process.env.HOSTED_ZONE_NAME || 'hostedzone',
+    HOSTED_NAME: process.env.HOSTED_NAME || 'hostedzone',
     STACK_NAME: process.env.STACK_NAME || 'stackname'
 }
 
