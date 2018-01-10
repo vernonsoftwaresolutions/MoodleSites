@@ -6,9 +6,7 @@ exports.map = function(stacks, sites){
     winston.debug("mapping stacks status ", stacks, " with sites ", sites)
     
     for(var i=0; i < stacks.length; i++) {
-        console.log("BUTTHOLE")
         let stack = stacks[i]
-        console.log(stack)
         winston.debug("getting index of stack ", stack)
         let siteIndex = sites.findIndex(s => s.siteId.S === stack.stackName)
         if(siteIndex < 0) {
