@@ -3,6 +3,7 @@ const initializeSiteCreation = require('../client/siteclient')
 const Site = require('../model/site')
 const Guid = require('guid')
 const winston = require('winston')
+const helper = require('../util/HttpRequestHelper')
 
 exports.getAll = function(accountId){
     winston.info("about to retrieve sites for accountId ", accountId)
@@ -36,8 +37,11 @@ exports.createSite = function(accountId, siteRequest){
     return new Promise((resolve, reject) => {
         Site.create(site)
         .then(data =>{
-            winston.info("stored site in persistence, now attempting to initialize creation process")
-            initializeSiteCreation(site)
+            //create Site request
+            let request = helper.createTenantRequest(site)
+            winston.info("stored site in persistence, now attempting to initialize creation process with request", request)
+            
+            initializeSiteCreation(request)
             .then(res =>{
                 winston.info("Initialization triggered successfully with response ", res)
                 return resolve(site);

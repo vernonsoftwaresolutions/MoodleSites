@@ -74,6 +74,9 @@ Resources:
           ENVIRONMENT: !Ref cfStage
           TABLE_NAME: !Sub ${tablebasename}_${cfStage}
           REGION: !Sub '${AWS::Region}'
+          VPC_ID: 'vpc-c7aa77be'
+          HOSTED_ZONE_NAME: 'vssdevelopment.com'
+          STACK_NAME: 'moodle-ecs-single'
       Events:
         ProxyApiRoot:
           Type: Api

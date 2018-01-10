@@ -4,7 +4,10 @@ const winston = require('winston')
 let defaultConfig = {
     POST_CREATION: "http://api.vssdevelopment.com/dev/moodle/tenants",
     REGION: process.env.REGION || 'us-east-1',
-    TABLE_NAME: process.env.TABLE_NAME || 'SITES'
+    TABLE_NAME: process.env.TABLE_NAME || 'SITES',
+    VPC_ID: process.env.VPC_ID || 'VPC-Id',
+    HOSTED_ZONE_NAME: process.env.HOSTED_ZONE_NAME || 'hostedzone',
+    STACK_NAME: process.env.STACK_NAME || 'stackname'
 }
 
 //method to get env specific config v
