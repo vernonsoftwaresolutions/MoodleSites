@@ -1,17 +1,29 @@
 'use strict'
 const initializeSiteCreation = require('../client/siteclient')
+const getStacksByAccountId = require('../client/moodlestackclient')
 const Site = require('../model/site')
 const Guid = require('guid')
 const winston = require('winston')
 const helper = require('../util/HttpRequestHelper')
+const mapper = require('../util/SiteStatusMapper')
 
 exports.getAll = function(accountId){
     winston.info("about to retrieve sites for accountId ", accountId)
 
     return new Promise((resolve, reject) => {
-        Site.getAll(accountId).then(data => {
-            winston.info("retrieved data ", data)
-            return resolve(data)
+        Site.getAll(accountId).then(sites => {
+            winston.info("retrieved sites ", sites, " about to enrich data for status")
+            
+            getStacksByAccountId(accountId)
+            .then(stacks => {
+                let enrichedResults = mapper.map(stacks, sites)
+                return resolve(sites)                
+            })
+            .catch(err =>{
+                //this is an error that should return an error response to the client
+                winston.info("Error retrieving sites for account ", accountId, " with error ", err)
+                return reject(new Error("Error retrieving stacks"))
+            })
         })
         .catch(err =>{
             //this is an error that should return an error response to the client

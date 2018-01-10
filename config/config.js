@@ -3,6 +3,7 @@ const winston = require('winston')
 
 let defaultConfig = {
     POST_CREATION: "http://api.vssdevelopment.com/dev/moodle/tenants",
+    GET_STACKS: 'https://cfstack.vssdevelopment.com/dev/moodle/stacks?tagKey=TYPE&tagValue=TENANT',
     REGION: process.env.REGION || 'us-east-1',
     TABLE_NAME: process.env.TABLE_NAME || 'SITES',
     VPC_ID: process.env.VPC_ID || 'VPC-Id',
@@ -21,11 +22,13 @@ function getConfig(){
     switch (env) {
         case 'dev':
             return {
-                POST_CREATION: "https://api.vssdevelopment.com/dev/moodle/tenants"                
+                POST_CREATION: "https://api.vssdevelopment.com/dev/moodle/tenants",
+                GET_STACKS: 'https://cfstack.vssdevelopment.com/dev/moodle/stacks?tagKey=TYPE&tagValue=TENANT',                
             }
         case 'stage':
             return {
-                POST_CREATION: "https://api.vssdevelopment.com/stage/moodle/tenants"                
+                POST_CREATION: "https://api.vssdevelopment.com/stage/moodle/tenants",
+                GET_STACKS: 'https://cfstack.vssdevelopment.com/stage/moodle/stacks?tagKey=TYPE&tagValue=TENANT',                
             }
     }
 }

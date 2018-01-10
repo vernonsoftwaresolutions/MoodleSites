@@ -7,7 +7,56 @@ describe('Site service tests', function() {
     let createSite;
     let accountId = "ACCOUNTGUID"
     let requestSite = {}
-
+    let sites = [
+        {
+            "siteId": {
+                "S": "3831fcc9-bde6-c891-020a-68c69b14c5f1"
+            },
+            "accountId": {
+                "S": "0tu6g0w7odxjd6e5kcjnkzw7b9"
+            },
+            "email": {
+                "S": "6095226633464246@me.com"
+            },
+            "url": {
+                "S": "http://www.google.com"
+            },
+            "creationTimestamp": {
+                "N": "1515359364102"
+            }
+        },
+        {
+            "siteId": {
+                "S": "deb7eb50-e10d-828a-726c-3b78186650fa"
+            },
+            "accountId": {
+                "S": "0tu6g0w7odxjd6e5kcjnkzw7b9"
+            },
+            "email": {
+                "S": "6095226633464246@me.com"
+            },
+            "url": {
+                "S": "http://www.google.com"
+            },
+            "creationTimestamp": {
+                "N": "1515359377712"
+            }
+        }
+    ]
+    let stacks = [
+        {
+            "stackName": "3831fcc9-bde6-c891-020a-68c69b14c5f1",
+            "url": "era5hd08wl3qmqg8gb40lik9.vpc-c7aa77be",
+            "status": "CREATE_IN_PROGRESS",
+            "creationTime": 1515561660972
+        },
+        {
+            "stackName": "deb7eb50-e10d-828a-726c-3b78186650fa",
+            "url": "rj3lb8x3vrt3xr.vpc-c7aa77be",
+            "status": "CREATE_IN_PROGRESS",
+            "creationTime": 1515561520497
+        }
+    ]
     describe('Site creation successful', function() {
         beforeEach(() => {
             mockery.enable({
@@ -23,11 +72,10 @@ describe('Site service tests', function() {
                 }
             });  
             mockery.registerMock('../client/siteclient', (site) => {
-                console.log("here")
                 assert.equal(site.accountId, accountId);
-                console.log("after this")
                 return Promise.resolve({messageId:"Okay"});
-            });            
+            });   
+          
             createSite = require('../../service/siteservice').createSite
         })
         afterEach(() => {
@@ -114,9 +162,21 @@ describe('Site service tests', function() {
             mockery.registerMock('../model/site', {
                 getAll: (accountId) => {
                     assert.equal(accountId, accountId);
-                    return Promise.resolve("Okay");
+                    return Promise.resolve(sites);
                 }
-            });            
+            });   
+            mockery.registerMock('../client/moodlestackclient', (aid) => {
+                    assert.equal(aid, accountId);
+                    return Promise.resolve(stacks);
+            });  
+            mockery.registerMock('../util/SiteStatusMapper', {
+                map: (stks, sts) => {
+                    assert.deepEqual(stks, stacks);
+                    assert.deepEqual(sts, sites);
+                    
+                    return Promise.resolve(sts);
+                }
+            });   
             getAll = require('../../service/siteservice').getAll
         })
         afterEach(() => {
@@ -126,7 +186,7 @@ describe('Site service tests', function() {
         it('respond with okay', function(done) {
             getAll(accountId).then(data =>{
 
-                assert.equal(data,"Okay")
+                assert.deepEqual(data,sites)
                 done()
             })
         });      
@@ -150,9 +210,39 @@ describe('Site service tests', function() {
             mockery.disable();
         });
         
-        it('respond with okay', function(done) {
+        it('respond with error', function(done) {
             getAll(accountId).catch(err =>{
                 assert.equal(err.message,"Error retrieving sites")
+                done()
+            })
+        });      
+    }) 
+    describe('stacks retrieval returns error', function() {
+        let getAll;
+        beforeEach(() => {
+            mockery.enable({
+                warnOnUnregistered: false,
+                useCleanCache: true,
+            });
+            mockery.registerMock('../model/site', {
+                getAll: (accountId) => {
+                    assert.equal(accountId, accountId);
+                    return Promise.resolve(sites);
+                }
+            });   
+            mockery.registerMock('../client/moodlestackclient', (aid) => {
+                    assert.equal(aid, accountId);
+                    return Promise.reject("error");
+                });           
+            getAll = require('../../service/siteservice').getAll
+        })
+        afterEach(() => {
+            mockery.disable();
+        });
+        
+        it('respond with error', function(done) {
+            getAll(accountId).catch(err =>{
+                assert.equal(err.message,"Error retrieving stacks")
                 done()
             })
         });      
