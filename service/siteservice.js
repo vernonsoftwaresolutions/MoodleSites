@@ -29,6 +29,7 @@ exports.createSite = function(accountId, siteRequest){
         siteId: Guid.create().value,
         email: siteRequest.email,
         url: siteRequest.url,
+        clientName: siteRequest.clientName,
         creationTimestamp: Date.now()
     }
 

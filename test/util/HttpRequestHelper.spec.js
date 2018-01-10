@@ -10,6 +10,7 @@ describe('HttpRequestHelper tests', function() {
         siteId: Guid.create().value,
         email: "email",
         url: "url",
+        clientName: "CLIENTNAME",
         creationTimestamp: Date.now()
     }
  
@@ -40,7 +41,7 @@ describe('HttpRequestHelper tests', function() {
         it('created request with clientName', function() {
             let req = helper.createTenantRequest(site)
             console.log(req)
-            assert.equal(req.clientName, site.email)
+            assert.equal(req.clientName, site.clientName)
         }) 
         it('created request with priority', function() {
             let req = helper.createTenantRequest(site)

@@ -90,7 +90,7 @@
 			"data": [],
 			"dataMode": "raw",
 			"auth": null,
-			"time": 1515348277435,
+			"time": 1515561294252,
 			"name": "POST Sites",
 			"description": "",
 			"collectionId": "1806b4d5-d72b-962d-60bf-2c87fd9da852",
@@ -99,7 +99,7 @@
 			"tests": "pm.test(\"Status code is 201\", function () {\n    pm.response.to.have.status(201);\n});",
 			"currentHelper": null,
 			"helperAttributes": null,
-			"rawModeData": "{\n        \"email\": \"{{randomEmail}}\",\n        \"url\": \"http://www.google.com\"\n}"
+			"rawModeData": "{\n        \"email\": \"{{randomEmail}}\",\n        \"url\": \"http://www.google.com\",\n        \"clientName\": \"{{randomClientName}}\"\n}"
 		},
 		{
 			"id": "d37dc201-19be-369b-5983-8ad4f9528e5e",
@@ -130,14 +130,17 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "0dbb1635-4e34-4420-8d8e-2bdd61258496",
+						"id": "3d23899d-ae07-4ee0-8e2c-b30d2791c6e0",
 						"type": "text/javascript",
 						"exec": [
 							"var randomClient = Math.random().toString(36).slice(2)",
 							"var randomEmail = Math.random().toString(10).slice(2) + \"@me.com\"",
+							"var randomClientName = Math.random().toString(36).slice(2)",
 							"",
 							"postman.setGlobalVariable(\"randomClient\",randomClient);",
-							"postman.setGlobalVariable(\"randomEmail\",randomEmail);"
+							"postman.setGlobalVariable(\"randomEmail\",randomEmail);",
+							"postman.setGlobalVariable(\"randomClientName\",randomClientName);",
+							""
 						]
 					}
 				}
@@ -148,16 +151,16 @@
 			"data": [],
 			"dataMode": "raw",
 			"auth": null,
-			"time": 1515292635017,
+			"time": 1515561291652,
 			"name": "POST Sites",
 			"description": "",
 			"collectionId": "1806b4d5-d72b-962d-60bf-2c87fd9da852",
 			"responses": [],
-			"preRequestScript": "var randomClient = Math.random().toString(36).slice(2)\nvar randomEmail = Math.random().toString(10).slice(2) + \"@me.com\"\n\npostman.setGlobalVariable(\"randomClient\",randomClient);\npostman.setGlobalVariable(\"randomEmail\",randomEmail);",
+			"preRequestScript": "var randomClient = Math.random().toString(36).slice(2)\nvar randomEmail = Math.random().toString(10).slice(2) + \"@me.com\"\nvar randomClientName = Math.random().toString(36).slice(2)\n\npostman.setGlobalVariable(\"randomClient\",randomClient);\npostman.setGlobalVariable(\"randomEmail\",randomEmail);\npostman.setGlobalVariable(\"randomClientName\",randomClientName);\n",
 			"tests": "pm.test(\"Status code is 201\", function () {\n    pm.response.to.have.status(201);\n});",
 			"currentHelper": null,
 			"helperAttributes": null,
-			"rawModeData": "{\n        \"email\": \"{{randomEmail}}\",\n        \"url\": \"http://www.google.com\"\n}"
+			"rawModeData": "{\n        \"email\": \"{{randomEmail}}\",\n        \"url\": \"http://www.google.com\",\n        \"clientName\": \"{{randomClientName}}\"\n}"
 		},
 		{
 			"id": "d8eaf7b9-f912-1709-3c42-76fc00614d9e",
