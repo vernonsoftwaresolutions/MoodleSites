@@ -36,13 +36,13 @@ exports.getAll = function(accountId){
 exports.createSite = function(accountId, siteRequest){
     //create initial site object to be stored
     //todo- this needs to be refactored and moved to a model for validation
-    let guid =  Guid.create().value;
+    let siteId = Math.random().toString(10).slice(2)
     let site = {
         accountId: accountId,
-        siteId: guid,
+        siteId: siteId,
         email: siteRequest.email,
         url: siteRequest.url,
-        clientName: guid,
+        clientName: siteId,
         creationTimestamp: Date.now()
     }
 
