@@ -16,6 +16,9 @@ exports.createSite = function(site){
             siteId: {
                 S: site.siteId
               },
+            siteName: {
+                S: site.siteName
+              },
             clientName: {
                 S: site.clientName
             },
