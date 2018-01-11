@@ -11,7 +11,6 @@ describe('HttpRequestHelper tests', function() {
         email: "email",
         url: "url",
         clientName: "CLIENTNAME",
-        siteName: "sitename",
         creationTimestamp: Date.now()
     }
  
@@ -42,7 +41,7 @@ describe('HttpRequestHelper tests', function() {
         it('created request with clientName', function() {
             let req = helper.createTenantRequest(site)
             console.log(req)
-            assert.equal(req.clientName, site.siteName)
+            assert.equal(req.clientName, site.clientName)
         }) 
         it('created request with priority', function() {
             let req = helper.createTenantRequest(site)

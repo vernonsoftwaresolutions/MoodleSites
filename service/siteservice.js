@@ -36,6 +36,7 @@ exports.getAll = function(accountId){
 exports.createSite = function(accountId, siteRequest){
     //create initial site object to be stored
     //todo- this needs to be refactored and moved to a model for validation
+    winston.info("received request for accountid ", accountId, " and request ", siteRequest)
     let guid =  Guid.create().value;
     let site = {
         accountId: accountId,
