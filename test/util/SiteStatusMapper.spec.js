@@ -54,15 +54,45 @@ describe('SiteStatusMapper tests', function() {
             "creationTime": 1515561520497
         }
     ]
- 
+    let missedStacks = [
+        {
+            "stackName": "totalMiss",
+            "url": "era5hd08wl3qmqg8gb40lik9.vpc-c7aa77be",
+            "status": "CREATE_IN_PROGRESS",
+            "creationTime": 1515561660972
+        },
+        {
+            "stackName": "not even close",
+            "url": "rj3lb8x3vrt3xr.vpc-c7aa77be",
+            "status": "CREATE_IN_PROGRESS",
+            "creationTime": 1515561520497
+        }
+    ]
+   
     describe('Stack status mapped', function() {
-        let res = mapper.map(stacks, sites)
-        console.log("res ", res)
+
         it('mapped status for 1st object', function() {
+            let res = mapper.map(stacks, sites)
+            
             assert.equal(res[0].status.S, "CREATE_IN_PROGRESS")
         })  
         it('mapped status for 2nd object', function() {
+            let res = mapper.map(stacks, sites)
+            
             assert.equal(res[1].status.S, "CREATE_IN_PROGRESS")
+        })  
+    })
+    describe('Stack status mapped missed', function() {
+
+        it('mapped status for 1st object N/A', function() {
+            let result = mapper.map(missedStacks, sites)
+            
+            assert.equal(result[0].status.S, "N/A")
+        })  
+        it('mapped status for 2nd object N/A', function() {
+            let result = mapper.map(missedStacks, sites)
+            
+            assert.equal(result[1].status.S, "N/A")
         })  
     })
 })

@@ -5,21 +5,33 @@ const winston = require('winston')
 exports.map = function(stacks, sites){
     winston.debug("mapping stacks status ", stacks, " with sites ", sites)
     
-    for(var i=0; i < stacks.length; i++) {
-        let stack = stacks[i]
-        winston.debug("getting index of stack ", stack)
-        let siteIndex = sites.findIndex(s => s.siteId.S === stack.stackName)
-        if(siteIndex < 0) {
-            winston.warn("missed mapping stack ", stack, " to sites ", sites)
-            continue
+    for(var i=0; i < sites.length; i++) {
+        let site = sites[i]
+        winston.debug("getting index of site ", site)
+        let stackIndex = stacks.findIndex(s => s.stackName === site.siteId.S)
+        winston.debug("got index ", stackIndex)
+        
+        let status
+
+        if(stackIndex < 0) {
+            winston.warn("missed mapping site ", site, " to stacks ", stacks)
+            //todo-factor out
+            status = "N/A"
+        } else {
+            winston.debug("hit index ", stackIndex, " for site ", site)
+            status = stacks[stackIndex].status
+            console.log(status)
         }
 
-        winston.debug("got index ", siteIndex)
         let statusObject = {
-                "S": stack.status
+                "S": status
             }
-        sites[siteIndex]["status"] = statusObject   
+        console.log(statusObject)
+        sites[i]["status"] = statusObject   
+
     }
+    
+
     return sites
     
 }
