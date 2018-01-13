@@ -45,7 +45,7 @@ exports.createSite = function(accountId, siteRequest){
         siteId: sid,
         email: siteRequest.email,
         url: siteRequest.url,
-        clientName: siteRequest.siteName,
+        siteName: siteRequest.siteName,
         creationTimestamp: Date.now()
     }
 

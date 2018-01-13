@@ -16,8 +16,8 @@ exports.createSite = function(site){
             siteId: {
                 S: site.siteId
               },
-            clientName: {
-                S: site.clientName
+            siteName: {
+                S: site.siteName
             },
             email: {
                 S: site.email

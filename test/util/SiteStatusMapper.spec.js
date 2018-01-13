@@ -6,7 +6,7 @@ const mapper = require('../../util/SiteStatusMapper.js')
 describe('SiteStatusMapper tests', function() {
     let sites = [
         {
-            "clientName": {
+            "siteName": {
                 "S": "sitename050840609309237283"
             },
             "siteId": {
@@ -26,7 +26,7 @@ describe('SiteStatusMapper tests', function() {
             }
         },
         {
-            "clientName": {
+            "siteName": {
                 "S": "sitenameanother"
             },
             "siteId": {

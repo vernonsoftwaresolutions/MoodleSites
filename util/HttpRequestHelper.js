@@ -9,7 +9,7 @@ exports.createTenantRequest = function(site){
         accountId: site.accountId,
         siteId: site.siteId,
         stackName: getConfigByKey('STACK_NAME'),
-        clientName: site.siteId,
+        siteName: site.siteId,
         vpcId: getConfigByKey('VPC_ID'),
         hostedZoneName: getConfigByKey('HOSTED_NAME'),
         priority: Math.floor(Math.random() * 100)
