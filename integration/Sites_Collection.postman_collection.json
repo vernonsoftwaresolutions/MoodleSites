@@ -1,12 +1,12 @@
 {
-	"id": "1806b4d5-d72b-962d-60bf-2c87fd9da852",
+	"id": "50661365-af3a-f2c2-51f5-a1a7939b50c7",
 	"name": "Sites_Collection",
 	"description": "",
 	"order": [
-		"d37dc201-19be-369b-5983-8ad4f9528e5e",
-		"534b6b56-cd19-4444-0a63-fdf1c40e2a95",
-		"82bfe6a5-3c56-76d2-cb5c-cddd92fa35bd",
-		"d8eaf7b9-f912-1709-3c42-76fc00614d9e"
+		"eef46b6f-5cb5-e729-65c0-8170102f58ac",
+		"692f08cf-fcbe-3e2d-d3dc-41cda41248bd",
+		"aafecf57-541e-cce2-a7dc-c2723c3f5cda",
+		"b2e5c724-5ab2-3c40-7638-139a3101fdd4"
 	],
 	"folders": [],
 	"folders_order": [],
@@ -18,7 +18,7 @@
 	"auth": null,
 	"requests": [
 		{
-			"id": "534b6b56-cd19-4444-0a63-fdf1c40e2a95",
+			"id": "692f08cf-fcbe-3e2d-d3dc-41cda41248bd",
 			"headers": "",
 			"headerData": [],
 			"url": "{{URL}}/accounts/{{randomClient}}/sites",
@@ -53,15 +53,16 @@
 			"time": 1515567193642,
 			"name": "GET Sites",
 			"description": "",
-			"collectionId": "1806b4d5-d72b-962d-60bf-2c87fd9da852",
+			"collectionId": "50661365-af3a-f2c2-51f5-a1a7939b50c7",
 			"responses": [],
+			"collection_id": "50661365-af3a-f2c2-51f5-a1a7939b50c7",
 			"preRequestScript": null,
 			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;\n\nvar jsonData = JSON.parse(responseBody);\n\npostman.setGlobalVariable(\"totalSites\",jsonData.length);\n\ntests[\"greater than 0\"] = jsonData.length > 0;\n\n\n",
 			"currentHelper": null,
 			"helperAttributes": null
 		},
 		{
-			"id": "82bfe6a5-3c56-76d2-cb5c-cddd92fa35bd",
+			"id": "aafecf57-541e-cce2-a7dc-c2723c3f5cda",
 			"headers": "Content-Type: application/json\n",
 			"headerData": [
 				{
@@ -93,19 +94,63 @@
 			"data": [],
 			"dataMode": "raw",
 			"auth": null,
-			"time": 1515652099760,
+			"time": 1515818430484,
 			"name": "POST Sites",
 			"description": "",
-			"collectionId": "1806b4d5-d72b-962d-60bf-2c87fd9da852",
+			"collectionId": "50661365-af3a-f2c2-51f5-a1a7939b50c7",
 			"responses": [],
 			"preRequestScript": null,
 			"tests": "pm.test(\"Status code is 201\", function () {\n    pm.response.to.have.status(201);\n});",
 			"currentHelper": null,
 			"helperAttributes": null,
-			"rawModeData": "{\n        \"email\": \"{{randomEmail}}\",\n        \"url\": \"http://www.google.com\",\n        \"siteName\": \"{{randomsiteName}}\",\n        \"siteName\": \"randomSiteName\"\n        \n}"
+			"rawModeData": "{\n        \"email\": \"{{randomEmail}}\",\n        \"url\": \"http://www.google.com\",\n        \"siteName\": \"{{randomsiteName}}\"\n}"
 		},
 		{
-			"id": "d37dc201-19be-369b-5983-8ad4f9528e5e",
+			"id": "b2e5c724-5ab2-3c40-7638-139a3101fdd4",
+			"headers": "",
+			"headerData": [],
+			"url": "{{URL}}/accounts/{{randomClient}}/sites",
+			"queryParams": [],
+			"events": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8c929368-a889-4bcb-ba82-70159a7ca37e",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"var previousTotal = parseInt(globals.totalSites)",
+							"var previousTotalInc = previousTotal + 1",
+							"tests[\"length increased\"] = previousTotalInc === jsonData.length;",
+							"",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"auth": null,
+			"time": 1515282101398,
+			"name": "GET Sites Length Increased",
+			"description": "",
+			"collectionId": "50661365-af3a-f2c2-51f5-a1a7939b50c7",
+			"responses": [],
+			"collection_id": "50661365-af3a-f2c2-51f5-a1a7939b50c7",
+			"preRequestScript": null,
+			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;\n\nvar jsonData = JSON.parse(responseBody);\n\nvar previousTotal = parseInt(globals.totalSites)\nvar previousTotalInc = previousTotal + 1\ntests[\"length increased\"] = previousTotalInc === jsonData.length;\n\n\n",
+			"currentHelper": null,
+			"helperAttributes": null
+		},
+		{
+			"id": "eef46b6f-5cb5-e729-65c0-8170102f58ac",
 			"headers": "Content-Type: application/json\n",
 			"headerData": [
 				{
@@ -156,59 +201,16 @@
 			"data": [],
 			"dataMode": "raw",
 			"auth": null,
-			"time": 1515652096608,
+			"time": 1515818427149,
 			"name": "POST Sites",
 			"description": "",
-			"collectionId": "1806b4d5-d72b-962d-60bf-2c87fd9da852",
+			"collectionId": "50661365-af3a-f2c2-51f5-a1a7939b50c7",
 			"responses": [],
 			"preRequestScript": "var randomClient = Math.random().toString(36).slice(2)\nvar randomEmail = Math.random().toString(10).slice(2) + \"@me.com\"\nvar randomsiteName = Math.random().toString(36).slice(2)\nvar randomSiteOffset = Math.random().toString(4).slice(2)\n\npostman.setGlobalVariable(\"randomClient\",randomClient);\npostman.setGlobalVariable(\"randomEmail\",randomEmail);\npostman.setGlobalVariable(\"randomsiteName\",randomsiteName);\npostman.setGlobalVariable(\"randomSiteName\",\"sitename\"+ randomSiteOffset);\n",
 			"tests": "pm.test(\"Status code is 201\", function () {\n    pm.response.to.have.status(201);\n});",
 			"currentHelper": null,
 			"helperAttributes": null,
-			"rawModeData": "{\n        \"email\": \"{{randomEmail}}\",\n        \"url\": \"http://www.google.com\",\n        \"siteName\": \"{{randomsiteName}}\",\n        \"siteName\": \"randomSiteName\"\n        \n}"
-		},
-		{
-			"id": "d8eaf7b9-f912-1709-3c42-76fc00614d9e",
-			"headers": "",
-			"headerData": [],
-			"url": "{{URL}}/accounts/{{randomClient}}/sites",
-			"queryParams": [],
-			"events": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "8c929368-a889-4bcb-ba82-70159a7ca37e",
-						"type": "text/javascript",
-						"exec": [
-							"tests[\"Status code is 200\"] = responseCode.code === 200;",
-							"",
-							"var jsonData = JSON.parse(responseBody);",
-							"",
-							"var previousTotal = parseInt(globals.totalSites)",
-							"var previousTotalInc = previousTotal + 1",
-							"tests[\"length increased\"] = previousTotalInc === jsonData.length;",
-							"",
-							"",
-							""
-						]
-					}
-				}
-			],
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "GET",
-			"data": null,
-			"dataMode": "params",
-			"auth": null,
-			"time": 1515282101398,
-			"name": "GET Sites Length Increased",
-			"description": "",
-			"collectionId": "1806b4d5-d72b-962d-60bf-2c87fd9da852",
-			"responses": [],
-			"preRequestScript": null,
-			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;\n\nvar jsonData = JSON.parse(responseBody);\n\nvar previousTotal = parseInt(globals.totalSites)\nvar previousTotalInc = previousTotal + 1\ntests[\"length increased\"] = previousTotalInc === jsonData.length;\n\n\n",
-			"currentHelper": null,
-			"helperAttributes": null
+			"rawModeData": "{\n        \"email\": \"{{randomEmail}}\",\n        \"url\": \"http://www.google.com\",\n        \"siteName\": \"{{randomsiteName}}\"\n}"
 		}
 	]
 }
