@@ -41,7 +41,7 @@ describe('HttpRequestHelper tests', function() {
         it('created request with clientName', function() {
             let req = helper.createTenantRequest(site)
             console.log(req)
-            assert.equal(req.clientName, site.clientName)
+            assert.equal(req.clientName, site.siteId)
         }) 
         it('created request with priority', function() {
             let req = helper.createTenantRequest(site)
