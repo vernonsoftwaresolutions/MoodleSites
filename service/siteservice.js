@@ -5,12 +5,8 @@ const Site = require('../model/site')
 const winston = require('winston')
 const helper = require('../util/HttpRequestHelper')
 const mapper = require('../util/SiteStatusMapper')
-const rn = require('random-number')
-const options = {
-    min: 1000000000,
-    max: 9999999999,
-    integer: true
-}
+var randomstring = require("randomstring");
+
 exports.getAll = function(accountId){
     winston.info("about to retrieve sites for accountId ", accountId)
 
@@ -42,7 +38,7 @@ exports.createSite = function(accountId, siteRequest){
     //todo- this needs to be refactored and moved to a model for validation
     winston.info("received request for accountid ", accountId, " and request ", siteRequest)
     //create sid string
-    let sid  = rn(options).toString();
+    let sid  = randomstring.generate(20)
 
     let site = {
         accountId: accountId,
