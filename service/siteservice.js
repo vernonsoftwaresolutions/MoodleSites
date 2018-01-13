@@ -2,11 +2,15 @@
 const initializeSiteCreation = require('../client/siteclient')
 const getStacksByAccountId = require('../client/moodlestackclient')
 const Site = require('../model/site')
-const Guid = require('guid')
 const winston = require('winston')
 const helper = require('../util/HttpRequestHelper')
 const mapper = require('../util/SiteStatusMapper')
-
+const rn = require('random-number')
+const options = {
+    min: 1000000000,
+    max: 9999999999,
+    integer: true
+}
 exports.getAll = function(accountId){
     winston.info("about to retrieve sites for accountId ", accountId)
 
@@ -37,10 +41,12 @@ exports.createSite = function(accountId, siteRequest){
     //create initial site object to be stored
     //todo- this needs to be refactored and moved to a model for validation
     winston.info("received request for accountid ", accountId, " and request ", siteRequest)
-    let guid =  Guid.create().value;
+    //create sid string
+    let sid  = rn(options).toString();
+
     let site = {
         accountId: accountId,
-        siteId: guid,
+        siteId: sid,
         email: siteRequest.email,
         url: siteRequest.url,
         clientName: siteRequest.siteName,

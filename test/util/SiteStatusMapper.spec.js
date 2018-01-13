@@ -6,54 +6,58 @@ const mapper = require('../../util/SiteStatusMapper.js')
 describe('SiteStatusMapper tests', function() {
     let sites = [
         {
+            "clientName": {
+                "S": "sitename050840609309237283"
+            },
             "siteId": {
-                "S": "3831fcc9-bde6-c891-020a-68c69b14c5f1"
+                "S": "f89c42fb-e011-fbe1-cd09-4991395c9f6e"
             },
             "accountId": {
-                "S": "0tu6g0w7odxjd6e5kcjnkzw7b9"
+                "S": "z2kwcrku55pn27mhc7u1bgldi"
             },
             "email": {
-                "S": "6095226633464246@me.com"
+                "S": "5958829155134366@me.com"
             },
             "url": {
                 "S": "http://www.google.com"
             },
             "creationTimestamp": {
-                "N": "1515359364102"
+                "N": "1515653801329"
             }
         },
         {
+            "clientName": {
+                "S": "sitenameanother"
+            },
             "siteId": {
-                "S": "deb7eb50-e10d-828a-726c-3b78186650fa"
+                "S": "f89c42fb-e011-fbe1-cd09-4991395c9f6e"
             },
             "accountId": {
-                "S": "0tu6g0w7odxjd6e5kcjnkzw7b9"
+                "S": "z2kwcrku55pn27mhc7u1bgldi"
             },
             "email": {
-                "S": "6095226633464246@me.com"
+                "S": "5958829155134366@me.com"
             },
             "url": {
                 "S": "http://www.google.com"
             },
             "creationTimestamp": {
-                "N": "1515359377712"
+                "N": "1515653801329"
             }
         }
     ]
-    let stacks = [
-        {
-            "stackName": "3831fcc9-bde6-c891-020a-68c69b14c5f1",
-            "url": "era5hd08wl3qmqg8gb40lik9.vpc-c7aa77be",
-            "status": "CREATE_IN_PROGRESS",
-            "creationTime": 1515561660972
-        },
-        {
-            "stackName": "deb7eb50-e10d-828a-726c-3b78186650fa",
-            "url": "rj3lb8x3vrt3xr.vpc-c7aa77be",
-            "status": "CREATE_IN_PROGRESS",
-            "creationTime": 1515561520497
-        }
-    ]
+    let stacks = [{
+        "stackName": "f89c42fb-e011-fbe1-cd09-4991395c9f6e",
+        "url": "sitename050840609309237283.vpc - c7aa77be",
+        "status": "CREATE_IN_PROGRESS",
+        "creationTime": 1515653807371
+    }, {
+        "stackName": "f89c42fb-e011-fbe1-cd09-4991395c9f6e",
+        "url": "randomSiteName.vpc - c7aa77be",
+        "status": "CREATE_IN_PROGRESS",
+        "creationTime": 1515653600312
+    }]
+
     let missedStacks = [
         {
             "stackName": "totalMiss",
