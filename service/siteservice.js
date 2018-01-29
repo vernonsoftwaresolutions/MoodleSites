@@ -92,6 +92,8 @@ exports.deleteSite = function(accountId, siteId){
     return new Promise((resolve, reject) => {
        Site.delete(accountId, siteId)
         .then(res => {
+            winston.info("about to initialize site deletion")
+
             initializeSiteDeletion(siteId)
             .then(res => {
                 winston.info("Successfully deleted site ", siteId)
@@ -107,7 +109,7 @@ exports.deleteSite = function(accountId, siteId){
        })
        .catch(err =>{
         //this is an error that should return an error response to the client
-        winston.info("Error deleting site")
+        winston.info("Error deleting site from dynamodb")
         return reject(new Error("Error deleting site"))
         })
 

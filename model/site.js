@@ -26,9 +26,9 @@ exports.create = function(site) {
 //todo-add validation
 // Create a site
 exports.delete = function(accountId, siteId) {
-    winston.debug("about to delete site ", siteId)
+    winston.info("about to delete site ", siteId)
     return repository.deleteSite(accountId, siteId).then(res =>{
-        winston.debug("created site ", res)
+        winston.info("deleted site ", res)
         return res        
     })
 }
