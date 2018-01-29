@@ -50,6 +50,32 @@ exports.createSite = function(site){
     })
 }
 
+exports.deleteSite = function(accountId,siteId){
+    let request = new AWS.DynamoDB({region: getConfigByKey('REGION'), apiVersion: '2012-08-10'});
+    // Create the DynamoDB query object
+    var params = {
+        Key:{
+            "accountId":{S: accountId},
+            "siteId":{S: siteId}
+        },
+       TableName: getConfigByKey('TABLE_NAME')
+      };
+      
+      winston.info("about to delete with params ", params)
+      //execute query and resolve or reject
+      return new Promise((resolve, reject)=>{        
+        request.deleteItem(params, function(err, data) {
+            if (err) {
+                winston.error("error deleting site ", err)
+                return reject(err)
+            } else {
+                winston.info("deleted site ", data)
+                return resolve(data)
+            }
+        });   
+    })
+}
+
 exports.getSites = function(accountId){
     let request = new AWS.DynamoDB({region: getConfigByKey('REGION'), apiVersion: '2012-08-10'});
     // Create the DynamoDB query object

@@ -6,7 +6,11 @@
 		"eef46b6f-5cb5-e729-65c0-8170102f58ac",
 		"692f08cf-fcbe-3e2d-d3dc-41cda41248bd",
 		"aafecf57-541e-cce2-a7dc-c2723c3f5cda",
-		"b2e5c724-5ab2-3c40-7638-139a3101fdd4"
+		"b2e5c724-5ab2-3c40-7638-139a3101fdd4",
+		"6dae8ec0-d5d6-4ad4-af45-f45764b710ff",
+		"ae5884de-b4a7-6786-2f57-ca1ede693818",
+		"ece2f9f3-f3df-31b6-cf6b-dbcc1b8b271f",
+		"59d636de-d8a1-2838-f956-06164bc592c7"
 	],
 	"folders": [],
 	"folders_order": [],
@@ -17,6 +21,50 @@
 	"variables": [],
 	"auth": null,
 	"requests": [
+		{
+			"id": "59d636de-d8a1-2838-f956-06164bc592c7",
+			"headers": "",
+			"headerData": [],
+			"url": "{{URL}}/accounts/{{randomClient}}/sites",
+			"queryParams": [],
+			"events": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0c725ffc-1d61-4233-bd74-a92528a0bd9e",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"postman.setGlobalVariable(\"totalSites\",jsonData.length);",
+							"",
+							"tests[\"length is 1\"] = jsonData.length === 1;",
+							"",
+							"var stackStatus = jsonData[0].status.S;",
+							"",
+							"tests[\"status is DELETE_IN_PROGRESS\"] = stackStatus === \"DELETE_IN_PROGRESS\""
+						]
+					}
+				}
+			],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"auth": null,
+			"time": 1517190504126,
+			"name": "Site has delete in progress status",
+			"description": "",
+			"collectionId": "50661365-af3a-f2c2-51f5-a1a7939b50c7",
+			"responses": [],
+			"preRequestScript": null,
+			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;\n\nvar jsonData = JSON.parse(responseBody);\n\npostman.setGlobalVariable(\"totalSites\",jsonData.length);\n\ntests[\"length is 1\"] = jsonData.length === 1;\n\nvar stackStatus = jsonData[0].status.S;\n\ntests[\"status is DELETE_IN_PROGRESS\"] = stackStatus === \"DELETE_IN_PROGRESS\"",
+			"currentHelper": null,
+			"helperAttributes": null
+		},
 		{
 			"id": "692f08cf-fcbe-3e2d-d3dc-41cda41248bd",
 			"headers": "",
@@ -62,6 +110,73 @@
 			"helperAttributes": null
 		},
 		{
+			"id": "6dae8ec0-d5d6-4ad4-af45-f45764b710ff",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{URL}}/accounts/{{randomClient}}/sites",
+			"queryParams": [],
+			"events": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6667d844-962f-45cf-bea6-0097b15c1f56",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"    //set siteId",
+							"    var jsonData = pm.response.json();",
+							"    postman.setGlobalVariable(\"siteId\",jsonData.siteId);",
+							"});",
+							""
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "4217278a-92ea-4ea0-8a10-5d3d16681c82",
+						"type": "text/javascript",
+						"exec": [
+							"var randomClient = Math.random().toString(36).slice(2)",
+							"var randomEmail = Math.random().toString(10).slice(2) + \"@me.com\"",
+							"var randomsiteName = Math.random().toString(36).slice(2)",
+							"var randomSiteOffset = Math.random().toString(4).slice(2)",
+							"",
+							"postman.setGlobalVariable(\"randomClient\",randomClient);",
+							"postman.setGlobalVariable(\"randomEmail\",randomEmail);",
+							"postman.setGlobalVariable(\"randomsiteName\",randomsiteName);",
+							"postman.setGlobalVariable(\"randomSiteName\",\"sitename\"+ randomSiteOffset);",
+							""
+						]
+					}
+				}
+			],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"auth": null,
+			"time": 1517190307660,
+			"name": "POST Sites to be deleted",
+			"description": "",
+			"collectionId": "50661365-af3a-f2c2-51f5-a1a7939b50c7",
+			"responses": [],
+			"preRequestScript": "var randomClient = Math.random().toString(36).slice(2)\nvar randomEmail = Math.random().toString(10).slice(2) + \"@me.com\"\nvar randomsiteName = Math.random().toString(36).slice(2)\nvar randomSiteOffset = Math.random().toString(4).slice(2)\n\npostman.setGlobalVariable(\"randomClient\",randomClient);\npostman.setGlobalVariable(\"randomEmail\",randomEmail);\npostman.setGlobalVariable(\"randomsiteName\",randomsiteName);\npostman.setGlobalVariable(\"randomSiteName\",\"sitename\"+ randomSiteOffset);\n",
+			"tests": "pm.test(\"Status code is 201\", function () {\n    pm.response.to.have.status(201);\n    //set siteId\n    var jsonData = pm.response.json();\n    postman.setGlobalVariable(\"siteId\",jsonData.siteId);\n});\n",
+			"currentHelper": null,
+			"helperAttributes": null,
+			"rawModeData": "{\n        \"email\": \"{{randomEmail}}\",\n        \"url\": \"http://www.google.com\",\n        \"siteName\": \"{{randomsiteName}}\"\n}"
+		},
+		{
 			"id": "aafecf57-541e-cce2-a7dc-c2723c3f5cda",
 			"headers": "Content-Type: application/json\n",
 			"headerData": [
@@ -78,11 +193,13 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "ec157eed-64a3-4585-86da-c70d93eb55a3",
+						"id": "9c208465-c0fa-428f-b47a-c45207975db6",
 						"type": "text/javascript",
 						"exec": [
 							"pm.test(\"Status code is 201\", function () {",
 							"    pm.response.to.have.status(201);",
+							"",
+							"",
 							"});"
 						]
 					}
@@ -94,16 +211,62 @@
 			"data": [],
 			"dataMode": "raw",
 			"auth": null,
-			"time": 1515818430484,
+			"time": 1517190304349,
 			"name": "POST Sites",
 			"description": "",
 			"collectionId": "50661365-af3a-f2c2-51f5-a1a7939b50c7",
 			"responses": [],
 			"preRequestScript": null,
-			"tests": "pm.test(\"Status code is 201\", function () {\n    pm.response.to.have.status(201);\n});",
+			"tests": "pm.test(\"Status code is 201\", function () {\n    pm.response.to.have.status(201);\n\n\n});",
 			"currentHelper": null,
 			"helperAttributes": null,
 			"rawModeData": "{\n        \"email\": \"{{randomEmail}}\",\n        \"url\": \"http://www.google.com\",\n        \"siteName\": \"{{randomsiteName}}\"\n}"
+		},
+		{
+			"id": "ae5884de-b4a7-6786-2f57-ca1ede693818",
+			"headers": "",
+			"headerData": [],
+			"url": "{{URL}}/accounts/{{randomClient}}/sites",
+			"queryParams": [],
+			"events": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7225f44c-7c1f-4c10-9c11-9e04e582cfdb",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"postman.setGlobalVariable(\"totalSites\",jsonData.length);",
+							"",
+							"tests[\"greater than 0\"] = jsonData.length > 0;",
+							"",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"auth": null,
+			"time": 1515567193642,
+			"name": "GET Sites to be deleted",
+			"description": "",
+			"collectionId": "50661365-af3a-f2c2-51f5-a1a7939b50c7",
+			"responses": [],
+			"collection_id": "50661365-af3a-f2c2-51f5-a1a7939b50c7",
+			"isFromCollection": true,
+			"collectionRequestId": "692f08cf-fcbe-3e2d-d3dc-41cda41248bd",
+			"preRequestScript": null,
+			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;\n\nvar jsonData = JSON.parse(responseBody);\n\npostman.setGlobalVariable(\"totalSites\",jsonData.length);\n\ntests[\"greater than 0\"] = jsonData.length > 0;\n\n\n",
+			"currentHelper": null,
+			"helperAttributes": null
 		},
 		{
 			"id": "b2e5c724-5ab2-3c40-7638-139a3101fdd4",
@@ -150,6 +313,45 @@
 			"helperAttributes": null
 		},
 		{
+			"id": "ece2f9f3-f3df-31b6-cf6b-dbcc1b8b271f",
+			"headers": "",
+			"headerData": [],
+			"url": "{{URL}}/accounts/{{randomClient}}/sites/{{siteId}}",
+			"queryParams": [],
+			"events": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "aa43bdda-3fff-4382-b510-b8994de768de",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"//pause for a couple seconds to let status switch",
+							"setTimeout(function(){",
+							"    ",
+							"}, 2000);"
+						]
+					}
+				}
+			],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "DELETE",
+			"data": null,
+			"dataMode": "params",
+			"auth": null,
+			"time": 1517190487558,
+			"name": "Delete Sites",
+			"description": "",
+			"collectionId": "50661365-af3a-f2c2-51f5-a1a7939b50c7",
+			"responses": [],
+			"preRequestScript": null,
+			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;\n\n//pause for a couple seconds to let status switch\nsetTimeout(function(){\n    \n}, 2000);",
+			"currentHelper": null,
+			"helperAttributes": null
+		},
+		{
 			"id": "eef46b6f-5cb5-e729-65c0-8170102f58ac",
 			"headers": "Content-Type: application/json\n",
 			"headerData": [
@@ -166,12 +368,14 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "ec157eed-64a3-4585-86da-c70d93eb55a3",
+						"id": "c88c1156-5524-4421-91aa-4c238ac65e58",
 						"type": "text/javascript",
 						"exec": [
 							"pm.test(\"Status code is 201\", function () {",
 							"    pm.response.to.have.status(201);",
-							"});"
+							"",
+							"});",
+							""
 						]
 					}
 				},
@@ -201,13 +405,13 @@
 			"data": [],
 			"dataMode": "raw",
 			"auth": null,
-			"time": 1515818427149,
+			"time": 1517190193686,
 			"name": "POST Sites",
 			"description": "",
 			"collectionId": "50661365-af3a-f2c2-51f5-a1a7939b50c7",
 			"responses": [],
 			"preRequestScript": "var randomClient = Math.random().toString(36).slice(2)\nvar randomEmail = Math.random().toString(10).slice(2) + \"@me.com\"\nvar randomsiteName = Math.random().toString(36).slice(2)\nvar randomSiteOffset = Math.random().toString(4).slice(2)\n\npostman.setGlobalVariable(\"randomClient\",randomClient);\npostman.setGlobalVariable(\"randomEmail\",randomEmail);\npostman.setGlobalVariable(\"randomsiteName\",randomsiteName);\npostman.setGlobalVariable(\"randomSiteName\",\"sitename\"+ randomSiteOffset);\n",
-			"tests": "pm.test(\"Status code is 201\", function () {\n    pm.response.to.have.status(201);\n});",
+			"tests": "pm.test(\"Status code is 201\", function () {\n    pm.response.to.have.status(201);\n\n});\n",
 			"currentHelper": null,
 			"helperAttributes": null,
 			"rawModeData": "{\n        \"email\": \"{{randomEmail}}\",\n        \"url\": \"http://www.google.com\",\n        \"siteName\": \"{{randomsiteName}}\"\n}"

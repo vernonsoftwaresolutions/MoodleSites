@@ -34,5 +34,20 @@ router.post('/accounts/:aid/sites', (req, res) => {
         res.status(500).json({message: "Internal Server Error"})
     })
 })
+router.delete('/accounts/:aid/sites/:sid', (req, res) => {
+    let accountId = req.params.aid
+    let siteId = req.params.sid
+
+    service.createSite(accountId, site)
+    .then(result => {
+        winston.info("returning successful ", result)
+        res.status(200).json(result)        
+    })
+    .catch(err => {
+        //todo- more explicit error handling
+        winston.info("Returning 500 error ", err)
+        res.status(500).json({message: "Internal Server Error"})
+    })
+})
   
 module.exports = router;

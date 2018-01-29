@@ -145,4 +145,29 @@ describe('sites repository', () => {
             })
         })            
     })
+    describe('delete site good request', () => {
+        
+        let accountId =  "10"
+        let siteId = "otherid"
+        beforeEach(() => {
+            AWS.mock('DynamoDB', 'deleteItem', function (params, callback) {
+                callback(null,{Items:[{ accountId: "10", siteId: "someid" }]});
+                });
+        })
+        afterEach(()=>{
+            AWS.restore('DynamoDB');              
+        })
+        
+
+        it('returns data', (done) => {
+            repository.deleteSite(accountId, siteId)
+            .then(data => {
+                console.log(data)
+                expect(data.Items[0].accountId).to.eq("10")
+                expect(data.Items[0].siteId).to.eq("someid")
+                
+                done()
+            })
+        })            
+    })
 })

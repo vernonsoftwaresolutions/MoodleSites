@@ -247,4 +247,102 @@ describe('Site service tests', function() {
             })
         });      
     }) 
+    describe('Sites deletion successful', function() {
+        let deleteSite;
+        let aid = "ACCOUNT"
+        let sid = "SITE"
+        beforeEach(() => {
+            mockery.enable({
+                warnOnUnregistered: false,
+                useCleanCache: true,
+            });
+            mockery.registerMock('../model/site', {
+                delete: (accountId, siteId) => {
+                    assert.equal(accountId, aid);
+                    assert.equal(siteId, sid);
+                    return Promise.resolve("OKAY");
+                }
+            });   
+            mockery.registerMock('../client/deletesiteclient', (siteId) => {
+                    assert.equal(siteId, sid);
+                    return Promise.resolve("OKAY");
+            });  
+            deleteSite = require('../../service/siteservice').deleteSite
+        })
+        afterEach(() => {
+            mockery.disable();
+        });
+        
+        it('respond with okay', function(done) {
+            deleteSite(aid, sid).then(data =>{
+
+                assert.deepEqual(data,"Ok")
+                done()
+            })
+        });      
+    }) 
+    describe('Sites dynamo delete successful, web service fail', function() {
+        let deleteSite;
+        let aid = "ACCOUNT"
+        let sid = "SITE"
+        beforeEach(() => {
+            mockery.enable({
+                warnOnUnregistered: false,
+                useCleanCache: true,
+            });
+            mockery.registerMock('../model/site', {
+                delete: (accountId, siteId) => {
+                    assert.equal(accountId, aid);
+                    assert.equal(siteId, sid);
+                    return Promise.resolve("OKAY");
+                }
+            });   
+            mockery.registerMock('../client/deletesiteclient', (siteId) => {
+                    assert.equal(siteId, sid);
+                    return Promise.reject();
+            });  
+            deleteSite = require('../../service/siteservice').deleteSite
+        })
+        afterEach(() => {
+            mockery.disable();
+        });
+        
+        it('respond with error object', function(done) {
+            deleteSite(aid, sid).catch(err =>{
+
+                assert.deepEqual(err.message,"Error calling delete service")
+                done()
+            })
+        });      
+    })
+    describe('Sites dynamo delete fail', function() {
+        let deleteSite;
+        let aid = "ACCOUNT"
+        let sid = "SITE"
+        beforeEach(() => {
+            mockery.enable({
+                warnOnUnregistered: false,
+                useCleanCache: true,
+            });
+            mockery.registerMock('../model/site', {
+                delete: (accountId, siteId) => {
+                    assert.equal(accountId, aid);
+                    assert.equal(siteId, sid);
+                    return Promise.reject();
+                }
+            });   
+            deleteSite = require('../../service/siteservice').deleteSite
+        })
+        afterEach(() => {
+            mockery.disable();
+        });
+        
+        it('respond with error object', function(done) {
+            deleteSite(aid, sid).catch(err =>{
+
+                assert.deepEqual(err.message,"Error deleting site")
+                done()
+            })
+        });      
+    })
 })

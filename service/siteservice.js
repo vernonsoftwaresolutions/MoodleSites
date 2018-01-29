@@ -1,5 +1,7 @@
 'use strict'
 const initializeSiteCreation = require('../client/siteclient')
+const initializeSiteDeletion = require('../client/deletesiteclient')
+
 const getStacksByAccountId = require('../client/moodlestackclient')
 const Site = require('../model/site')
 const winston = require('winston')
@@ -74,6 +76,39 @@ exports.createSite = function(accountId, siteRequest){
             //this is an error that should return an error response to the client
             winston.info("Error storing site")
             return reject(new Error("Error storing site"))
+        })
+
+    })
+
+
+
+}
+
+exports.deleteSite = function(accountId, siteId){
+    //create initial site object to be stored
+    //todo- this needs to be refactored and moved to a model for validation
+    winston.info("received delete request for accountid ", accountId, " and site ", siteId)
+
+    return new Promise((resolve, reject) => {
+       Site.delete(accountId, siteId)
+        .then(res => {
+            initializeSiteDeletion(siteId)
+            .then(res => {
+                winston.info("Successfully deleted site ", siteId)
+
+                return resolve("Ok");
+            })
+            .catch(err=>{
+                //todo- create error queue to handle this
+                //todo- also create error handling schema
+                winston.info("Error calling delete site client, placing error on error queue")
+                return reject(new Error("Error calling delete service"))
+            })
+       })
+       .catch(err =>{
+        //this is an error that should return an error response to the client
+        winston.info("Error deleting site")
+        return reject(new Error("Error deleting site"))
         })
 
     })

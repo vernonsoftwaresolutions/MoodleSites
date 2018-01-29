@@ -67,5 +67,34 @@ describe('Site model tests', function() {
             })
         });      
      
-    });        
+    });   
+    describe('Site deleteAll', function() {
+        let aid = "someid"
+        let sid= "otherId"
+        beforeEach(() => {
+            mockery.enable({
+                warnOnUnregistered: false,
+                useCleanCache: true,
+            });
+            mockery.registerMock('../db/sitesrepository', {
+                deleteSite: (accountId, siteId) => {
+                    assert.equal(accountId, aid);
+                    assert.equal(siteId, sid);
+
+                    return Promise.resolve("OK");
+                }  
+            })        
+            Site = require('../../model/site')
+        })
+        afterEach(() => {
+            mockery.disable();
+        });
+        it('Returns Okay', function() {
+
+            Site.delete(aid, sid).then(res => {
+                assert.equal(res, "OK")
+            })
+        });      
+     
+    });         
 });
