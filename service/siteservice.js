@@ -103,7 +103,7 @@ exports.deleteSite = function(accountId, siteId){
             .catch(err=>{
                 //todo- create error queue to handle this
                 //todo- also create error handling schema
-                winston.info("Error calling delete site client, placing error on error queue")
+                winston.info("Error calling delete site client, placing error on error queue ", err)
                 return reject(new Error("Error calling delete service"))
             })
        })

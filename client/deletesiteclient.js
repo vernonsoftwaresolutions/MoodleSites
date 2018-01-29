@@ -8,7 +8,7 @@ const getConfigByKey = require('../config/config');
 const initializeSiteDeletion = function(siteId){
     winston.info("about to build request with siteId ", siteId)
     let url = getConfigByKey('DELETE_STACKS').replace(':stackId', siteId)
-    winston.info('about to make DELETE request to ', url, " with siteId ", stackId)
+    winston.info('about to make DELETE request to ', url, " with siteId ", siteId)
     //POST to SiteCreation resource
     return new Promise((resolve, reject)=> {
         fetch(url, { method: 'DELETE', body: {} })
