@@ -41,7 +41,7 @@ router.delete('/accounts/:aid/sites/:sid', (req, res) => {
         service.deleteSite(accountId, siteId)
         .then(result => {
             winston.info("returning successful ", result)
-            res.status(200).json(result)        
+            res.status(200).json({message:result})        
         })
         .catch(err => {
             //todo- more explicit error handling
