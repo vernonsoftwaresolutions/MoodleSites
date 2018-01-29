@@ -14,7 +14,7 @@ const initializeSiteCreation = function(site){
         .then(res => {
             if(!res.ok){
                 winston.error("Received invalid response code ", res.status)
-                reject(new Error("Service Unavailable"))
+                return reject(new Error("Service Unavailable"))
             }
             winston.debug("Returned response ", res)
             return resolve(res.json());
