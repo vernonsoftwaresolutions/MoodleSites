@@ -108,9 +108,9 @@ exports.deleteSite = function(accountId, siteId){
             })
        })
        .catch(err =>{
-        //this is an error that should return an error response to the client
-        winston.info("Error deleting site from dynamodb")
-        return reject(new Error("Error deleting site"))
+            //this is an error that should return an error response to the client
+            winston.info("Error deleting site from dynamodb ", err)
+            return reject(new Error("Error deleting site"))
         })
 
     })
