@@ -38,7 +38,7 @@ router.delete('/accounts/:aid/sites/:sid', (req, res) => {
     let accountId = req.params.aid
     let siteId = req.params.sid
 
-    service.createSite(accountId, site)
+    service.createSite(accountId, siteId)
     .then(result => {
         winston.info("returning successful ", result)
         res.status(200).json(result)        
