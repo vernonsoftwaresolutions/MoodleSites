@@ -37,17 +37,24 @@ router.post('/accounts/:aid/sites', (req, res) => {
 router.delete('/accounts/:aid/sites/:sid', (req, res) => {
     let accountId = req.params.aid
     let siteId = req.params.sid
+    try {
+        service.deleteSite(accountId, siteId)
+        .then(result => {
+            winston.info("returning successful ", result)
+            res.status(200).json(result)        
+        })
+        .catch(err => {
+            //todo- more explicit error handling
+            winston.info("Returning 500 error ", err)
+            res.status(503).json({message: "Service Unavailable"})
+        })
+    }
+    catch(err){
+        winston.error("Exception thrown while processing request ", err)
 
-    service.deleteSite(accountId, siteId)
-    .then(result => {
-        winston.info("returning successful ", result)
-        res.status(200).json(result)        
-    })
-    .catch(err => {
-        //todo- more explicit error handling
-        winston.info("Returning 500 error ", err)
         res.status(500).json({message: "Internal Server Error"})
-    })
+
+    }
 })
   
 module.exports = router;
