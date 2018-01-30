@@ -10,7 +10,9 @@
 		"6dae8ec0-d5d6-4ad4-af45-f45764b710ff",
 		"ae5884de-b4a7-6786-2f57-ca1ede693818",
 		"ece2f9f3-f3df-31b6-cf6b-dbcc1b8b271f",
-		"59d636de-d8a1-2838-f956-06164bc592c7"
+		"59d636de-d8a1-2838-f956-06164bc592c7",
+		"5c4517c2-01c7-b24e-3024-f8d569b60b59",
+		"4f189bcc-8e0e-d8de-08a2-4f4e9e529424"
 	],
 	"folders": [],
 	"folders_order": [],
@@ -22,6 +24,41 @@
 	"auth": null,
 	"requests": [
 		{
+			"id": "4f189bcc-8e0e-d8de-08a2-4f4e9e529424",
+			"headers": "",
+			"headerData": [],
+			"url": "{{URL}}/accounts/{{randomClient}}/sites/{{siteId2}}",
+			"queryParams": [],
+			"events": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "01350d5e-2983-41f1-841f-3399a09215db",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							""
+						]
+					}
+				}
+			],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "DELETE",
+			"data": null,
+			"dataMode": "params",
+			"auth": null,
+			"time": 1517280564456,
+			"name": "Cleanup Site 2",
+			"description": "",
+			"collectionId": "50661365-af3a-f2c2-51f5-a1a7939b50c7",
+			"responses": [],
+			"preRequestScript": null,
+			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;\n",
+			"currentHelper": null,
+			"helperAttributes": null
+		},
+		{
 			"id": "59d636de-d8a1-2838-f956-06164bc592c7",
 			"headers": "",
 			"headerData": [],
@@ -31,7 +68,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "0c725ffc-1d61-4233-bd74-a92528a0bd9e",
+						"id": "2e276d28-c0f3-4839-8ed1-0169697fc2f0",
 						"type": "text/javascript",
 						"exec": [
 							"tests[\"Status code is 200\"] = responseCode.code === 200;",
@@ -40,11 +77,12 @@
 							"",
 							"postman.setGlobalVariable(\"totalSites\",jsonData.length);",
 							"",
-							"tests[\"length is 1\"] = jsonData.length === 1;",
-							"",
-							"var stackStatus = jsonData[0].status.S;",
-							"",
-							"tests[\"status is DELETE_IN_PROGRESS\"] = stackStatus === \"DELETE_IN_PROGRESS\""
+							"tests[\"length is 1\"] = jsonData.length === 0;",
+							"//pause for a couple seconds to let status switch",
+							"setTimeout(function(){",
+							"    console.log(\"allow for site to create\")",
+							"}, 5000);",
+							""
 						]
 					}
 				}
@@ -55,13 +93,48 @@
 			"data": null,
 			"dataMode": "params",
 			"auth": null,
-			"time": 1517190504126,
+			"time": 1517280659214,
 			"name": "Site has delete in progress status",
 			"description": "",
 			"collectionId": "50661365-af3a-f2c2-51f5-a1a7939b50c7",
 			"responses": [],
 			"preRequestScript": null,
-			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;\n\nvar jsonData = JSON.parse(responseBody);\n\npostman.setGlobalVariable(\"totalSites\",jsonData.length);\n\ntests[\"length is 1\"] = jsonData.length === 1;\n\nvar stackStatus = jsonData[0].status.S;\n\ntests[\"status is DELETE_IN_PROGRESS\"] = stackStatus === \"DELETE_IN_PROGRESS\"",
+			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;\n\nvar jsonData = JSON.parse(responseBody);\n\npostman.setGlobalVariable(\"totalSites\",jsonData.length);\n\ntests[\"length is 1\"] = jsonData.length === 0;\n//pause for a couple seconds to let status switch\nsetTimeout(function(){\n    console.log(\"allow for site to create\")\n}, 5000);\n",
+			"currentHelper": null,
+			"helperAttributes": null
+		},
+		{
+			"id": "5c4517c2-01c7-b24e-3024-f8d569b60b59",
+			"headers": "",
+			"headerData": [],
+			"url": "{{URL}}/accounts/{{randomClient}}/sites/{{siteId1}}",
+			"queryParams": [],
+			"events": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fdab002f-992f-4638-9bcb-01335f94adc8",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							""
+						]
+					}
+				}
+			],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "DELETE",
+			"data": null,
+			"dataMode": "params",
+			"auth": null,
+			"time": 1517280626110,
+			"name": "Cleanup Site 1",
+			"description": "",
+			"collectionId": "50661365-af3a-f2c2-51f5-a1a7939b50c7",
+			"responses": [],
+			"preRequestScript": null,
+			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;\n",
 			"currentHelper": null,
 			"helperAttributes": null
 		},
@@ -193,12 +266,14 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "9c208465-c0fa-428f-b47a-c45207975db6",
+						"id": "80df420f-c65e-423a-b92c-cfcdbcd043ad",
 						"type": "text/javascript",
 						"exec": [
 							"pm.test(\"Status code is 201\", function () {",
 							"    pm.response.to.have.status(201);",
-							"",
+							"    //set siteId",
+							"    var jsonData = pm.response.json();",
+							"    postman.setGlobalVariable(\"siteId2\",jsonData.siteId);",
 							"",
 							"});"
 						]
@@ -211,13 +286,13 @@
 			"data": [],
 			"dataMode": "raw",
 			"auth": null,
-			"time": 1517190304349,
+			"time": 1517280404141,
 			"name": "POST Sites",
 			"description": "",
 			"collectionId": "50661365-af3a-f2c2-51f5-a1a7939b50c7",
 			"responses": [],
 			"preRequestScript": null,
-			"tests": "pm.test(\"Status code is 201\", function () {\n    pm.response.to.have.status(201);\n\n\n});",
+			"tests": "pm.test(\"Status code is 201\", function () {\n    pm.response.to.have.status(201);\n    //set siteId\n    var jsonData = pm.response.json();\n    postman.setGlobalVariable(\"siteId2\",jsonData.siteId);\n\n});",
 			"currentHelper": null,
 			"helperAttributes": null,
 			"rawModeData": "{\n        \"email\": \"{{randomEmail}}\",\n        \"url\": \"http://www.google.com\",\n        \"siteName\": \"{{randomsiteName}}\"\n}"
@@ -232,7 +307,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "7225f44c-7c1f-4c10-9c11-9e04e582cfdb",
+						"id": "60751c52-f3f7-4243-8a11-9272602b8e05",
 						"type": "text/javascript",
 						"exec": [
 							"tests[\"Status code is 200\"] = responseCode.code === 200;",
@@ -242,6 +317,11 @@
 							"postman.setGlobalVariable(\"totalSites\",jsonData.length);",
 							"",
 							"tests[\"greater than 0\"] = jsonData.length > 0;",
+							"",
+							"//pause for a couple seconds to let status switch",
+							"setTimeout(function(){",
+							"    console.log(\"allow for site to create\")",
+							"}, 5000);",
 							"",
 							"",
 							""
@@ -255,16 +335,13 @@
 			"data": null,
 			"dataMode": "params",
 			"auth": null,
-			"time": 1515567193642,
+			"time": 1517280653198,
 			"name": "GET Sites to be deleted",
 			"description": "",
 			"collectionId": "50661365-af3a-f2c2-51f5-a1a7939b50c7",
 			"responses": [],
-			"collection_id": "50661365-af3a-f2c2-51f5-a1a7939b50c7",
-			"isFromCollection": true,
-			"collectionRequestId": "692f08cf-fcbe-3e2d-d3dc-41cda41248bd",
 			"preRequestScript": null,
-			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;\n\nvar jsonData = JSON.parse(responseBody);\n\npostman.setGlobalVariable(\"totalSites\",jsonData.length);\n\ntests[\"greater than 0\"] = jsonData.length > 0;\n\n\n",
+			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;\n\nvar jsonData = JSON.parse(responseBody);\n\npostman.setGlobalVariable(\"totalSites\",jsonData.length);\n\ntests[\"greater than 0\"] = jsonData.length > 0;\n\n//pause for a couple seconds to let status switch\nsetTimeout(function(){\n    console.log(\"allow for site to create\")\n}, 5000);\n\n\n",
 			"currentHelper": null,
 			"helperAttributes": null
 		},
@@ -368,12 +445,14 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "c88c1156-5524-4421-91aa-4c238ac65e58",
+						"id": "61dedec5-5763-44cb-8708-ff6c0f81067a",
 						"type": "text/javascript",
 						"exec": [
 							"pm.test(\"Status code is 201\", function () {",
 							"    pm.response.to.have.status(201);",
-							"",
+							"    //set siteId",
+							"    var jsonData = pm.response.json();",
+							"    postman.setGlobalVariable(\"siteId1\",jsonData.siteId);",
 							"});",
 							""
 						]
@@ -405,13 +484,13 @@
 			"data": [],
 			"dataMode": "raw",
 			"auth": null,
-			"time": 1517190193686,
+			"time": 1517280395438,
 			"name": "POST Sites",
 			"description": "",
 			"collectionId": "50661365-af3a-f2c2-51f5-a1a7939b50c7",
 			"responses": [],
 			"preRequestScript": "var randomClient = Math.random().toString(36).slice(2)\nvar randomEmail = Math.random().toString(10).slice(2) + \"@me.com\"\nvar randomsiteName = Math.random().toString(36).slice(2)\nvar randomSiteOffset = Math.random().toString(4).slice(2)\n\npostman.setGlobalVariable(\"randomClient\",randomClient);\npostman.setGlobalVariable(\"randomEmail\",randomEmail);\npostman.setGlobalVariable(\"randomsiteName\",randomsiteName);\npostman.setGlobalVariable(\"randomSiteName\",\"sitename\"+ randomSiteOffset);\n",
-			"tests": "pm.test(\"Status code is 201\", function () {\n    pm.response.to.have.status(201);\n\n});\n",
+			"tests": "pm.test(\"Status code is 201\", function () {\n    pm.response.to.have.status(201);\n    //set siteId\n    var jsonData = pm.response.json();\n    postman.setGlobalVariable(\"siteId1\",jsonData.siteId);\n});\n",
 			"currentHelper": null,
 			"helperAttributes": null,
 			"rawModeData": "{\n        \"email\": \"{{randomEmail}}\",\n        \"url\": \"http://www.google.com\",\n        \"siteName\": \"{{randomsiteName}}\"\n}"
